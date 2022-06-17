@@ -1,0 +1,10 @@
+Acelga,kg,100
+Muslo,kg,150
+Lechuga,kg,100.3
+Fideo,c/u,9.7
+Sal(500g),c/u,150
+Caldo de pollo,c/u,60
+Mayonesa(950g),c/u,550
+Pure de tomate(530g),c/u,114.5
+Pollo,kg,100
+Queso,kg,120.2

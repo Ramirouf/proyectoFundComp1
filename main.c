@@ -1,80 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./libs/Init.h" // Los struct del programa
+#include "./libs/utilities.h"
 
-#define CONFIG_TICKET_NAME_LENGTH 20
-#define CONFIG_TICKET_ADDRESS_LENGTH 50
-#define CONFIG_TICKET_PHONE_LENGTH 20
-#define CONFIG_TICKET_CP_LENGTH 50
-#define CONFIG_TICKET_CUIT_LENGTH 11
-#define CONFIG_TICKET_GB_LENGTH 20
+#include "./libs/methods-item-ticket.h"
+#include "./libs/methods-ticket.h"
+#include "./libs/momentC.h"
+#include "./libs/methods-tree.h"
 
-#define ITEM_INFO_NAME_LENGTH 20
-#define ITEM_INFO_UNIT_LENGTH 10
+// Testing
+#include<conio.h>
+// Testing
 
-#define TICKET_ID_LENGTH 10
-#define TICKET_DATE_LENGTH 8
-#define TICKET_TIME_LENGTH 6
-#define TICKER_RES_IVA_LENGTH 50
-#define TICKET_LEYENDA_LENGTH 50
 
-struct ConfigTicket{
-	char businessName[CONFIG_TICKET_NAME_LENGTH];
-	char address[CONFIG_TICKET_ADDRESS_LENGTH];
-	char phone[CONFIG_TICKET_PHONE_LENGTH];
-	char postalCode[CONFIG_TICKET_CP_LENGTH];
-	char cuit[CONFIG_TICKET_CUIT_LENGTH];
-	char messageGB[CONFIG_TICKET_GB_LENGTH];
-};
 
-// struct Item{
-//   char name[ITEM_INFO_NAME_LENGTH];
-//   char unit[ITEM_INFO_UNIT_LENGTH];
-//   float price;
-// };
-
-// struct ItemTicket{
-//   struct Item itemInfo;
-//   int quantity;
-//   char id[TICKET_ID_LENGTH];
-// };
-
-// struct Ticket{
-//   char id[TICKET_ID_LENGTH];
-//   char date[TICKET_DATE_LENGTH];
-//   char time[TICKET_TIME_LENGTH];
-//   char resIVA[TICKER_RES_IVA_LENGTH];
-//   char leyenda[TICKET_LEYENDA_LENGTH];
-//   struct ConfigTicket configT;
-// };
-
-void SeparateCross(int cant){
-	for (int i = 1; i < cant; i++) printf("*");
-	printf("\n");
-}
-
-void SeparateLine(int cant){
-	if (cant == 0) cant = 25;
-
-	for (int i = 1; i < cant; i++) printf("-");
-	printf("\n");
-}
-
-void PrintMessageError(char *message, char *type){
-	printf("\n");
-	SeparateLine(0);
-	printf("%s: %s\n", type, message);
-	SeparateLine(0);
-	printf("\n");
-}
-
-void MenuTitle(char *title){
-	// https://misc.flogisoft.com/bash/tip_colors_and_formatting
-	printf("%s\n", title);
-}
-
-void PrintInTheMiddle(char *message, int cant){
-
-}
 
 struct ConfigTicket GetConfigTicket(char *mode){
 	// File mode - https://www.tutorialesprogramacionya.com/cya/detalleconcepto.php?punto=80&codigo=80&inicio=75
@@ -204,13 +143,43 @@ void TicketSettings(){
 				printf("\n\n");
 				break;
 			case 4:
-				// Vuelve al men� principal
+				// Vuelve al menu principal
 				break;
 			default:
 				printf("Opcion no valida\n");
 		}
 	} while (option != 4);
 
+}
+
+void GenerateTicket(){
+	// Pasos para generar un ticket
+	// 1. Elegir un item del menu (se muestra el nombre y el precio)
+	// 2. Elegir la cantidad de items
+	// 3. Agregar el item a la lista de items
+	/*
+		4. Una vez que se termina de agregar todos los items, se muestra todos los items, se muestra el total,
+		se puede modificar y/o eliminar items, se puede agregar nuevos items.
+	*/
+	// 5. Se guarda la lista de items en un archivo
+	// 6. Se imprime el ticket
+
+	// Implementacion
+	// 1. Elegir un item del menu (se muestra el nombre y el precio)
+
+
+	//TESTING
+	printf("AGREGANDO TICKET...\n");
+	InsertTicket();
+	printf("TICKET AGREGADO\n");
+	// TESTING
+}
+
+void ViewAllTickets(){
+	// Imprimir direccion de memoria de todos los tickets
+	printf("TODOS LOS TICKETS\n");
+	PrintTicketTreePre(pTicketTree);
+	printf("\nFin.\n");
 }
 
 void MenuSystem(){
@@ -227,7 +196,7 @@ void MenuSystem(){
 
 		MenuTitle("MENU SYSTEM");
 		printf("5) Configuracion de cuenta\n");
-		printf("6) Configuracion del ticket \n"); // Mostrar c�mo se ve el ticket y preguntar que quiere cambiar
+		printf("6) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
 		printf("7) Cerrar sesion\n");
 		printf("8) Salir\n");
 
@@ -239,7 +208,7 @@ void MenuSystem(){
 		switch (option){
 			case 1:
 				printf("\n\n");
-				// GenerateTicket ();
+				GenerateTicket();
 				printf("\n\n");
 				break;
 			case 2:
@@ -254,7 +223,7 @@ void MenuSystem(){
 				break;
 			case 4:
 				printf("\n\n");
-				// ViewAllTickets ();
+				ViewAllTickets();
 				printf("\n\n");
 				break;
 			case 5:
@@ -283,8 +252,8 @@ void MenuSystem(){
 	} while (option != 8);
 }
 
-
-int main(int argc, char *argv[]){
+int main(){
+	// Declaracion de variables e inicializacion en el archivo Init.h
 
 	MenuSystem();
 

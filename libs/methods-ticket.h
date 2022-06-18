@@ -6,7 +6,7 @@ char *IVAResponsability(){
   int option;
   char *responsability = (char *)malloc(sizeof(char) * 26);
 
-  printf("Responsabilidad frente al impuesto al valor agregado del emisor según corresponda:\n");
+  printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
   printf("1. IVA Responsable Inscripto\n");
   printf("2. IVA no Responsable\n");
   printf("3. IVA exento\n");

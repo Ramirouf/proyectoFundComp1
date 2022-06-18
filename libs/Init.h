@@ -25,7 +25,7 @@ struct ConfigTicket{
 struct Item{
   char *name;
   char *unit;
-  float price;
+  double price;
 };
 
 struct ItemTicket{
@@ -44,7 +44,7 @@ struct Ticket{
 
 struct TicketTree{
   unsigned int id;
-  struct Ticket *ticket;
+  struct Ticket ticket;
   struct TicketTree *left;
   struct TicketTree *right;
 };
@@ -55,7 +55,7 @@ unsigned int id_tickets = 1;
 
 // Productos para ser usados en el ticket en forma de vector
 struct Item products[CANT_PRODUCTS] = {
-  {"Fideo", "c/u", 9.7},
+  {"Fideo", "c/u", 9.99},
   {"Sal", "c/u", 150},
   {"Caldo de pollo", "c/u", 60},
   {"Mayonesa", "c/u", 550},

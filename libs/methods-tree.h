@@ -2,25 +2,25 @@
 #include <stdlib.h>
 
 void InsertTicket(){
-  struct TicketTree *pNewTicketTreeItem;
-  pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
-
+  struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
+  struct ItemTicket *pItemTicket = NULL;
 
 
   // DATOS DEL TICKET
   // id
   pNewTicketTreeItem->id = id_tickets;
   // Hora y Fecha
-  pNewTicketTreeItem->ticket->time = getTime();
-  pNewTicketTreeItem->ticket->date = getDate();
-  // Responsabilidad frente al IVA del emisor
-  pNewTicketTreeItem->ticket->resIVA = IVAResponsability();
+  pNewTicketTreeItem->ticket.time = getTime();
+  // printf("TIME: %s\n", pNewTicketTreeItem->ticket.time);
+  pNewTicketTreeItem->ticket.date = getDate();
+  // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
   // Leyenda
-  pNewTicketTreeItem->ticket->leyenda = "A CONSUMIDOR FINAL";
+  pNewTicketTreeItem->ticket.leyenda = "A CONSUMIDOR FINAL";
+  // Items del ticket
+  GenerateItemsTicket(pItemTicket);
 
-
-
-  GenerateItemsTicket(pNewTicketTreeItem->ticket->itemTicket);
+  // Responsabilidad frente al IVA del emisor
+  pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
 
   pNewTicketTreeItem->left = NULL;
   pNewTicketTreeItem->right = NULL;

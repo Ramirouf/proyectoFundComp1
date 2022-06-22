@@ -7,14 +7,7 @@
 Crear un puntero a producto en main y en el header
 Se pasa un id y devuelve un puntero al producto creado en el header
 */
-/*
-typedef struct
-{
-    int id;
-    char name[50];
-    double price;
-} Product;
-*/
+
 int main()
 {
 

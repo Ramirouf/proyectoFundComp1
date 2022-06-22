@@ -51,7 +51,9 @@ struct TicketTree{
 
 // Inicializacion de variables globales y estructuras
 struct TicketTree *pTicketTree = NULL;
+struct ItemTicket *pAuxItemTicket = NULL;
 unsigned int id_tickets = 1;
+
 
 // Productos para ser usados en el ticket en forma de vector
 struct Item products[CANT_PRODUCTS] = {

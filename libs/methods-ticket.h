@@ -4,41 +4,26 @@
 
 char *IVAResponsability(){
   int option;
-  char *responsability = (char *)malloc(sizeof(char) * 26);
-
-  printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
-  printf("1. IVA Responsable Inscripto\n");
-  printf("2. IVA no Responsable\n");
-  printf("3. IVA exento\n");
-  printf("4. Responsable Monotributo\n");
-  printf("5. Monotributista Social\n");
-
-  printf("Ingrese una opcion: ");
-  scanf("%d", &option);
+  char *responsability[] = { "IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo",
+  "Monotributista Social" };
 
   do{
-    switch (option){
-      case 1:
-        responsability = "IVA Responsable Inscripto";
-        break;
-      case 2:
-        responsability = "IVA no Responsable";
-        break;
-      case 3:
-        responsability = "IVA exento";
-        break;
-      case 4:
-        responsability = "Responsable Monotributo";
-        break;
-      case 5:
-        responsability = "Monotributista Social";
-        break;
-      default:
-        PrintMessageError("Opcion invalida", "Error");
-    }
-  } while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5);
+    printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
+    printf("1. IVA Responsable Inscripto\n");
+    printf("2. IVA no Responsable\n");
+    printf("3. IVA exento\n");
+    printf("4. Responsable Monotributo\n");
+    printf("5. Monotributista Social\n");
 
-  return responsability;
+    printf("Ingrese una opcion: ");
+    scanf("%d", &option);
+
+    if (option < 1 || option > 5){
+      PrintMessageError("Opcion invalida", "Error");
+    }
+  } while (option < 1 || option > 5);
+
+  return responsability[option - 1];
 }
 
 

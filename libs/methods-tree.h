@@ -2,8 +2,11 @@
 #include <stdlib.h>
 
 void InsertTicket(){
+  printf("InsertTicket\n");
   struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
-  struct ItemTicket *pItemTicket = NULL;
+  printf("F*ck\n");
+  int cont = 1;
+  // struct ItemTicket *pItemTicket = NULL;
 
 
   // DATOS DEL TICKET
@@ -15,12 +18,22 @@ void InsertTicket(){
   pNewTicketTreeItem->ticket.date = getDate();
   // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
   // Leyenda
-  pNewTicketTreeItem->ticket.leyenda = "A CONSUMIDOR FINAL";
+  pNewTicketTreeItem->ticket.leyenda = "A CONSUMIDOR FINAL"; // Puede que se elimine en el futuro*
   // Items del ticket
-  GenerateItemsTicket(pItemTicket);
+
+
+  pNewTicketTreeItem->ticket.itemTicket = NULL; // Inicializar el puntero a NULL
+
+
+  InsertItemTicket();
+
+  pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
+
 
   // Responsabilidad frente al IVA del emisor
+
   pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
+
 
   pNewTicketTreeItem->left = NULL;
   pNewTicketTreeItem->right = NULL;
@@ -47,6 +60,9 @@ void InsertTicket(){
       previus->right = pNewTicketTreeItem;
     }
   }
+
+  // Limpio el puntero auxiliar
+  pAuxItemTicket = NULL;
 
   // Incrementa el contador de ID de tickets para el príximo ticket
   id_tickets++;

@@ -11,49 +11,38 @@ void ListOfItems(){
   }
 }
 
-void GenerateItemsTicket(struct ItemTicket *pItemTicket){
-  int option, cant_prod_min;
-  // Cantidad de productos minimos para generar un ticket = 1
-  cant_prod_min = 0;
+void InsertItemTicket(){
+  int option;
+  struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
 
-  // Generar un ticket con una cantidad de productos minimos
-  while (cant_prod_min <= 3){
-    struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
-    ListOfItems();
+  ListOfItems();
+  printf("\nIngrese el codigo del producto: ");
+  scanf("%d", &option);
 
-    printf("\nIngrese el codigo del producto: ");
-    scanf("%d", &option);
+  if (option >= 1 && option <= 10){
+    // Info del nuevo item
+    pNewItemTicket->itemInfo->name = products[option - 1].name;
+    // printf("Name product:  %s\n", pNewItemTicket->itemInfo->name);
+    pNewItemTicket->itemInfo->unit = products[option - 1].unit;
+    // printf("Unit product:  %s\n", pNewItemTicket->itemInfo->unit);
+    pNewItemTicket->itemInfo->price = products[option - 1].price;
+    // printf("Price product:  %.2f\n", pNewItemTicket->itemInfo->price);
+    // Pedir la cantidad de productos
+    printf("\nIngrese la cantidad: ");
+    scanf("%d", &pNewItemTicket->quantity);
+    // printf("Quantity product:  %d\n", pNewItemTicket->quantity);
+    printf("\n");
 
-    if (option >= 1 && option <= 10){
-      // Info del nuevo item
-      pNewItemTicket->itemInfo->name = products[option - 1].name;
-      // printf("Name product:  %s\n", pNewItemTicket->itemInfo->name);
-      pNewItemTicket->itemInfo->unit = products[option - 1].unit;
-      // printf("Unit product:  %s\n", pNewItemTicket->itemInfo->unit);
-      pNewItemTicket->itemInfo->price = products[option - 1].price;
-      // printf("Price product:  %.2f\n", pNewItemTicket->itemInfo->price);
-      // Pedir la cantidad de productos
-      printf("\nIngrese la cantidad: ");
-      scanf("%d", &pNewItemTicket->quantity);
-      // printf("Quantity product:  %d\n", pNewItemTicket->quantity);
-      printf("\n");
-
-      // Enlazar la nueva lista con la anterior
-      if (pItemTicket == NULL){
-        pItemTicket = pNewItemTicket;
-        pNewItemTicket->next = NULL;
-        printf("Hello from == NULL\n");
-      } else{
-        printf("Hello from != NULL\n");
-        pNewItemTicket->next = pItemTicket;
-        pItemTicket = pNewItemTicket;
-      }
-
-      // Incrementar la cantidad de productos minimos
-      cant_prod_min++;
+    // Enlazar la nueva lista con la anterior
+    if (pAuxItemTicket == NULL){
+      pAuxItemTicket = pNewItemTicket;
+      pNewItemTicket->next = NULL;
     } else{
-      PrintMessageError("Debe de haber al menos un producto para generar un ticket", "Error");
+      pNewItemTicket->next = pAuxItemTicket;
+      pAuxItemTicket = pNewItemTicket;
     }
+  } else{
+    PrintMessageError("Debe de haber al menos un producto para generar un ticket", "Error");
   }
 }
 

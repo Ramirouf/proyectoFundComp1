@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "./libs/Init.h" // Los struct del programa
 #include "./libs/utilities.h"
+#include "./libs/momentC.h"
 
 #include "./libs/methods-item-ticket.h"
 #include "./libs/methods-ticket.h"
-#include "./libs/momentC.h"
 #include "./libs/methods-tree.h"
 
 // Testing
@@ -223,7 +223,7 @@ void MenuSystem(){
 				break;
 			case 4:
 				printf("\n\n");
-				ViewAllTickets();
+				// ViewAllTickets();
 				printf("\n\n");
 				break;
 			case 5:

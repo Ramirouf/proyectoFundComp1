@@ -15,6 +15,7 @@ void InsertItemTicket(){
   int option;
   struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
 
+
   ListOfItems();
   printf("\nIngrese el codigo del producto: ");
   scanf("%d", &option);

@@ -2,35 +2,25 @@
 #include <stdlib.h>
 
 void InsertTicket(){
-  printf("InsertTicket\n");
+  // printf("PROBLEMS 1\n");
   struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
-  printf("F*ck\n");
-  // struct ItemTicket *pItemTicket = NULL;
-
+  // printf("PROBLEMS 2\n");
 
   // DATOS DEL TICKET
   // id
   pNewTicketTreeItem->id = id_tickets;
   // Hora y Fecha
   pNewTicketTreeItem->ticket.time = getTime();
-  // printf("TIME: %s\n", pNewTicketTreeItem->ticket.time);
+  // // printf("TIME: %s\n", pNewTicketTreeItem->ticket.time);
   pNewTicketTreeItem->ticket.date = getDate();
-  // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
-  // Leyenda
-  pNewTicketTreeItem->ticket.leyenda = "A CONSUMIDOR FINAL"; // Puede que se elimine en el futuro*
-  // Items del ticket
+  // // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
 
-
-  pNewTicketTreeItem->ticket.itemTicket = NULL; // Inicializar el puntero a NULL
-
-
-  InsertItemTicket();
-
-  pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
+  // Items del ticket - Dont work
+  // InsertItemTicket(); 
+  // pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
 
 
   // Responsabilidad frente al IVA del emisor
-
   pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
 
 
@@ -80,10 +70,10 @@ void PrintTicketTreePre(struct TicketTree *CopyTicketTree){
     printf("ID: %u \n", CopyTicketTree->id);
     printf("Fecha: %s \n", CopyTicketTree->ticket.date);
     printf("Hora: %s \n", CopyTicketTree->ticket.time);
-    printf("Leyenda: %s \n", CopyTicketTree->ticket.leyenda);
+    printf("Leyenda: A CONSUMIDOR FINAL \n");
     printf("Responsabilidad IVA: %s \n", CopyTicketTree->ticket.resIVA);
-    printf("\n");
-    PrintItemTicket(CopyTicketTree->ticket.itemTicket);
+    // printf("\n");
+    // PrintItemTicket(CopyTicketTree->ticket.itemTicket);
     printf("\n");
     PrintTicketTreePre(CopyTicketTree->left);
     PrintTicketTreePre(CopyTicketTree->right);

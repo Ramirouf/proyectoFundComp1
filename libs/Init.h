@@ -38,7 +38,6 @@ struct Ticket{
   char *date;
   char *time;
   char *resIVA;
-  char *leyenda;
   struct ItemTicket *itemTicket;
 };
 

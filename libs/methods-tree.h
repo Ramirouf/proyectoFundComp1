@@ -5,7 +5,6 @@ void InsertTicket(){
   printf("InsertTicket\n");
   struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
   printf("F*ck\n");
-  int cont = 1;
   // struct ItemTicket *pItemTicket = NULL;
 
 
@@ -68,9 +67,24 @@ void InsertTicket(){
   id_tickets++;
 }
 
+void PrintItemTicket(struct ItemTicket *pItemTicket){
+  printf("PrintItemTicket\n");
+  printf("Cantidad: %d\n", pItemTicket->quantity);
+  printf("Nombre Producto: %s\n", pItemTicket->itemInfo->name);
+  printf("Unidad: %s\n", pItemTicket->itemInfo->unit);
+  printf("Precio: %.2f\n", pItemTicket->itemInfo->price);
+}
+
 void PrintTicketTreePre(struct TicketTree *CopyTicketTree){
   if (CopyTicketTree != NULL){
     printf("ID: %u \n", CopyTicketTree->id);
+    printf("Fecha: %s \n", CopyTicketTree->ticket.date);
+    printf("Hora: %s \n", CopyTicketTree->ticket.time);
+    printf("Leyenda: %s \n", CopyTicketTree->ticket.leyenda);
+    printf("Responsabilidad IVA: %s \n", CopyTicketTree->ticket.resIVA);
+    printf("\n");
+    PrintItemTicket(CopyTicketTree->ticket.itemTicket);
+    printf("\n");
     PrintTicketTreePre(CopyTicketTree->left);
     PrintTicketTreePre(CopyTicketTree->right);
   }

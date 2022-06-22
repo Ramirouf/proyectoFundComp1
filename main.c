@@ -188,8 +188,8 @@ void MenuSystem(){
 	do{
 		MenuTitle("MENU PRINCIPAL");
 		printf("1) Generar un Ticket\n");
-		printf("2) Validar un Ticket\n");
-		printf("3) Ver un Ticket\n");
+		printf("2) Validar un Ticket (dont work)\n");
+		printf("3) Ver un Ticket (dont work)\n");
 		printf("4) Ver todos los Tickets\n");
 
 		printf("\n");
@@ -197,7 +197,7 @@ void MenuSystem(){
 		MenuTitle("MENU SYSTEM");
 		printf("5) Configuracion de cuenta\n");
 		printf("6) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
-		printf("7) Cerrar sesion\n");
+		printf("7) Cerrar sesion (dont work)\n");
 		printf("8) Salir\n");
 
 		printf("\n");
@@ -223,7 +223,7 @@ void MenuSystem(){
 				break;
 			case 4:
 				printf("\n\n");
-				// ViewAllTickets();
+				ViewAllTickets();
 				printf("\n\n");
 				break;
 			case 5:

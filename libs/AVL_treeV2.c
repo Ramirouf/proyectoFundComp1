@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./momentC.h"
 
 // Estructura de los Productos
-struct Item{
+struct Item {
 	int idItem;
 	char *name;
 	double price;
@@ -27,45 +28,105 @@ struct Ticket {
 	int height;
 };
 
-	// struct Ticket{
-	// 	char *date;
-	// 	char *time;
-	// 	char *resIVA;
-	// 	struct ItemTicket *itemTicket;
-	// };
+// struct Ticket{
+// 	char *date;
+// 	char *time;
+// 	char *resIVA;
+// 	struct ItemTicket *itemTicket;
+// };
 
-	// struct TicketTree{
-	// 	unsigned int id;
-	// 	struct Ticket ticket;
-	// 	struct TicketTree *left;
-	// 	struct TicketTree *right;
-	// };
+// struct TicketTree{
+// 	unsigned int id;
+// 	struct Ticket ticket;
+// 	struct TicketTree *left;
+// 	struct TicketTree *right;
+// };
 
 
+// Carlos
+
+void InsertTicket(){
+  // printf("PROBLEMS 1\n");
+  struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
+  // printf("PROBLEMS 2\n");
+
+  // DATOS DEL TICKET
+  // id
+  pNewTicketTreeItem->id = id_tickets;
+  // Hora y Fecha
+  pNewTicketTreeItem->ticket.time = getTime();
+  // // printf("TIME: %s\n", pNewTicketTreeItem->ticket.time);
+  pNewTicketTreeItem->ticket.date = getDate();
+  // // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
+
+  // Items del ticket - Dont work
+  // InsertItemTicket(); 
+  // pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
+
+
+  // Responsabilidad frente al IVA del emisor
+  pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
+
+
+  pNewTicketTreeItem->left = NULL;
+  pNewTicketTreeItem->right = NULL;
+
+
+
+  if (pTicketTree == NULL){
+    pTicketTree = pNewTicketTreeItem;
+  } else{
+    struct TicketTree *previus, *current;
+    previus = NULL;
+    current = pTicketTree;
+    while (current != NULL){
+      previus = current;
+      if (pNewTicketTreeItem->id < current->id){
+        current = current->left;
+      } else{
+        current = current->right;
+      }
+    }
+    if (pNewTicketTreeItem->id < previus->id){
+      previus->left = pNewTicketTreeItem;
+    } else{
+      previus->right = pNewTicketTreeItem;
+    }
+  }
+
+  // Limpio el puntero auxiliar
+  pAuxItemTicket = NULL;
+
+  // Incrementa el contador de ID de tickets para el príximo ticket
+  id_tickets++;
+}
+
+// Carlos
 
 
 // Funcion para calcular la altura
-int height(struct Ticket *N)
-{
-	if (N == NULL)
-		return 0;
+int height(struct Ticket *N) {
+	if (N == NULL) return 0;
 	return N->height;
 }
+
 // Funcion para hallar el maximo entre dos enteros
-int max(int a, int b)
-{
-	return (a > b)? a : b;
+int max(int a, int b){
+	return (a > b) ? a : b;
 }
+
 /* Funcion que crea un nuevo Ticket. */
-struct Ticket* newTicket(int id)
-{
-	struct Ticket* Ticket = (struct Ticket*)
-		malloc(sizeof(struct Ticket));
+struct Ticket* newTicket(int id){
+	struct Ticket* Ticket = (struct Ticket*)malloc(sizeof(struct Ticket));
 	Ticket->id = id;
+	Ticket->date = getDate(); // Obtiene la fecha actual
+	Ticket->time = getTime(); // Obtiene la hora actual
+	Ticket->resIVA = 
 	Ticket->left = NULL;
 	Ticket->right = NULL;
 	Ticket->height = 1; // se debe inicializar
-	return(Ticket);
+
+	return Ticket;
 }
 // Funcion para rotar a la derecha el subarbol y
 struct Ticket *rightRotate(struct Ticket *y)
@@ -211,53 +272,56 @@ struct Ticket* deleteTicket(struct Ticket* root, int id)
 	return root;
 }
 // Funcion para imprimir el arbol en preorden
-void preOrder(struct Ticket *root)
-{
-	if(root != NULL)
-	{
+void preOrder(struct Ticket *root) {
+	if(root != NULL) {
 		printf("%d ", root->id);
 		preOrder(root->left);
 		preOrder(root->right);
 	}
 }
-int main()
-{
+int main() {
+	int id_ticket = 1; // Id de los tickets
 	struct Ticket *root = NULL;
-	/* Cosntruye el arbol de la figura
-	root = insert(root, 15);
-	root = insert(root, 5);
-	root = insert(root, 14);
-	root = insert(root, 0);
-	root = insert(root, 6);
-	root = insert(root, 11);
-	root = insert(root, -1);
-	root = insert(root, 1);
-	root = insert(root, 2);
-	 El arbol es
-	9
-	/ \
-	1 10
-	/ \ \
-	0 5 11
-	/ / \
-	-1 2 6
+	
+	root = insert(root, id_ticket);
+	id_ticket++; // Incrementar ID para el siguiente ticket
 	
 	
-	printf("El arbol es \n");
-		   preOrder(root);
-	root = deleteTicket(root, 15);
-	Arbol AVL despues del borrado del 10
-	1
-	/ \
-	0 9
-	/ / \
-	-1 5 11
-	/ \
-	2 6
+	// // Cosntruye el arbol de la figura
+	// root = insert(root, i++);
+	// root = insert(root, 5);
+	// root = insert(root, 14);
+	// root = insert(root, 0);
+	// root = insert(root, 6);
+	// root = insert(root, 11);
+	// root = insert(root, -1);
+	// root = insert(root, 1);
+	// root = insert(root, 2);
+	//  El arbol es
+	// 9
+	// / \
+	// 1 10
+	// / \ \
+	// 0 5 11
+	// / / \
+	// -1 2 6
+	
+	
+	// printf("El arbol es \n");
+	// 	   preOrder(root);
+	// root = deleteTicket(root, 15);
+	// Arbol AVL despues del borrado del 10
+	// 1
+	// / \
+	// 0 9
+	// / / \
+	// -1 5 11
+	// / \
+	// 2 6
 
 	
-	printf("Arbol despues del borrado del 10 \n");
-	preOrder(root);*/
+	// printf("Arbol despues del borrado del 10 \n");
+	// preOrder(root);
 	return 0;
 } 
 

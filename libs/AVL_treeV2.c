@@ -45,60 +45,90 @@ struct Ticket {
 
 // Carlos
 
-void InsertTicket(){
-  // printf("PROBLEMS 1\n");
-  struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
-  // printf("PROBLEMS 2\n");
+// void InsertTicket(){
+//   // printf("PROBLEMS 1\n");
+//   struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
+//   // printf("PROBLEMS 2\n");
 
-  // DATOS DEL TICKET
-  // id
-  pNewTicketTreeItem->id = id_tickets;
-  // Hora y Fecha
-  pNewTicketTreeItem->ticket.time = getTime();
-  // // printf("TIME: %s\n", pNewTicketTreeItem->ticket.time);
-  pNewTicketTreeItem->ticket.date = getDate();
-  // // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
+//   // DATOS DEL TICKET
+//   // id
+//   pNewTicketTreeItem->id = id_tickets;
+//   // Hora y Fecha
+//   pNewTicketTreeItem->ticket.time = getTime();
+//   // // printf("TIME: %s\n", pNewTicketTreeItem->ticket.time);
+//   pNewTicketTreeItem->ticket.date = getDate();
+//   // // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
 
-  // Items del ticket - Dont work
-  // InsertItemTicket(); 
-  // pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
-
-
-  // Responsabilidad frente al IVA del emisor
-  pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
+//   // Items del ticket - Dont work
+//   // InsertItemTicket(); 
+//   // pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
 
 
-  pNewTicketTreeItem->left = NULL;
-  pNewTicketTreeItem->right = NULL;
+//   // Responsabilidad frente al IVA del emisor
+//   pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
+
+
+//   pNewTicketTreeItem->left = NULL;
+//   pNewTicketTreeItem->right = NULL;
 
 
 
-  if (pTicketTree == NULL){
-    pTicketTree = pNewTicketTreeItem;
-  } else{
-    struct TicketTree *previus, *current;
-    previus = NULL;
-    current = pTicketTree;
-    while (current != NULL){
-      previus = current;
-      if (pNewTicketTreeItem->id < current->id){
-        current = current->left;
-      } else{
-        current = current->right;
-      }
+//   if (pTicketTree == NULL){
+//     pTicketTree = pNewTicketTreeItem;
+//   } else{
+//     struct TicketTree *previus, *current;
+//     previus = NULL;
+//     current = pTicketTree;
+//     while (current != NULL){
+//       previus = current;
+//       if (pNewTicketTreeItem->id < current->id){
+//         current = current->left;
+//       } else{
+//         current = current->right;
+//       }
+//     }
+//     if (pNewTicketTreeItem->id < previus->id){
+//       previus->left = pNewTicketTreeItem;
+//     } else{
+//       previus->right = pNewTicketTreeItem;
+//     }
+//   }
+
+//   // Limpio el puntero auxiliar
+//   pAuxItemTicket = NULL;
+
+//   // Incrementa el contador de ID de tickets para el príximo ticket
+//   id_tickets++;
+// }
+
+void PrintMessageError(char *message, char *type){
+  printf("\n");
+  printf("%s: %s\n", type, message);
+  printf("\n");
+}
+
+char *IVAResponsability(){
+  int option;
+  char *responsability[] = { "IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo",
+  "Monotributista Social" };
+
+  do{
+    printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
+    printf("1. IVA Responsable Inscripto\n");
+    printf("2. IVA no Responsable\n");
+    printf("3. IVA exento\n");
+    printf("4. Responsable Monotributo\n");
+    printf("5. Monotributista Social\n");
+
+    printf("Ingrese una opcion: ");
+    scanf("%d", &option);
+
+    if (option < 1 || option > 5){
+      PrintMessageError("Opcion invalida", "Error");
     }
-    if (pNewTicketTreeItem->id < previus->id){
-      previus->left = pNewTicketTreeItem;
-    } else{
-      previus->right = pNewTicketTreeItem;
-    }
-  }
+  } while (option < 1 || option > 5);
 
-  // Limpio el puntero auxiliar
-  pAuxItemTicket = NULL;
-
-  // Incrementa el contador de ID de tickets para el príximo ticket
-  id_tickets++;
+  return responsability[option - 1];
 }
 
 // Carlos
@@ -121,7 +151,10 @@ struct Ticket* newTicket(int id){
 	Ticket->id = id;
 	Ticket->date = getDate(); // Obtiene la fecha actual
 	Ticket->time = getTime(); // Obtiene la hora actual
-	Ticket->resIVA = 
+	Ticket->resIVA = IVAResponsability();
+
+	// Generar Lista de Productos - empty
+
 	Ticket->left = NULL;
 	Ticket->right = NULL;
 	Ticket->height = 1; // se debe inicializar
@@ -279,6 +312,7 @@ void preOrder(struct Ticket *root) {
 		preOrder(root->right);
 	}
 }
+
 int main() {
 	int id_ticket = 1; // Id de los tickets
 	struct Ticket *root = NULL;

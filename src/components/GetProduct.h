@@ -1,7 +1,6 @@
 /*
 Header file to get product from csv file
-It receives a product's id and a pointer to an empty product struct,
-     and returns that product struct with values
+It receives a product's id, and returns that product struct with values
 */
 #include <stdio.h>
 #include <stdlib.h>

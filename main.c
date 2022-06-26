@@ -325,7 +325,7 @@ void PrintListProductTicket(){
 
 int main(){
 
-	SetListProducts();
+	SetListProducts(); // Inicializar la lista de productos global
 	MenuSystem();
 
 

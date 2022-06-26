@@ -13,7 +13,7 @@ void InsertTicket(){
   strcpy(pNewTicketTreeItem->date, getDate());
   strcpy(pNewTicketTreeItem->time, getTime());
 
-  // Items del ticket - Dont work
+  // Items del ticket
   while (cant_prod_min <= 3){
     InsertItemTicket();
     cant_prod_min++;
@@ -25,17 +25,15 @@ void InsertTicket(){
   strcpy(pNewTicketTreeItem->resIVA, IVAResponsability());
 
 
-  pNewTicketTreeItem->left = NULL;
-  pNewTicketTreeItem->right = NULL;
-
-
-
+  // Enlazar el nuevo nodo con el arbol
   if (pTicketTree == NULL){
     pTicketTree = pNewTicketTreeItem;
+    pNewTicketTreeItem->left = NULL;
+    pNewTicketTreeItem->right = NULL;
+    pNewTicketTreeItem->height = 0;
   } else{
-    struct Ticket *previus, *current;
-    previus = NULL;
-    current = pTicketTree;
+    struct Ticket *previus = NULL;
+    struct Ticket *current = pTicketTree;
     while (current != NULL){
       previus = current;
       if (pNewTicketTreeItem->id < current->id){
@@ -44,10 +42,16 @@ void InsertTicket(){
         current = current->right;
       }
     }
-    if (pNewTicketTreeItem->id < previus->id){
-      previus->left = pNewTicketTreeItem;
-    } else{
+    if (previus->id < pNewTicketTreeItem->id){
       previus->right = pNewTicketTreeItem;
+      pNewTicketTreeItem->left = NULL;
+      pNewTicketTreeItem->right = NULL;
+      pNewTicketTreeItem->height = 0;
+    } else{
+      previus->left = pNewTicketTreeItem;
+      pNewTicketTreeItem->left = NULL;
+      pNewTicketTreeItem->right = NULL;
+      pNewTicketTreeItem->height = 0;
     }
   }
 
@@ -59,22 +63,16 @@ void InsertTicket(){
 }
 
 void PrintItemTicket(struct ItemTicket *pItemTicket){
-  printf("PrintItemTicket\n");
-  printf("Cantidad: %f\n", pItemTicket->quantity);
-  printf("Producto: %s\n", pItemTicket->itemInfo->name);
-  printf("Precio: %.2f\n", pItemTicket->itemInfo->price);
+  while (pItemTicket != NULL){
+    printf("%d\n %s\n %.2f\n", pItemTicket->itemInfo->idItem, pItemTicket->itemInfo->name, pItemTicket->quantity);
+    pItemTicket = pItemTicket->next;
+  }
 }
 
 void PrintTicketTreePre(struct Ticket *CopyTicketTree){
   if (CopyTicketTree != NULL){
-    printf("ID: %u \n", CopyTicketTree->id);
-    printf("Fecha: %s \n", CopyTicketTree->date);
-    printf("Hora: %s \n", CopyTicketTree->time);
-    printf("Leyenda: A CONSUMIDOR FINAL \n");
-    printf("Responsabilidad IVA: %s \n", CopyTicketTree->resIVA);
-    // printf("\n");
-    // PrintItemTicket(CopyTicketTree->ticket.itemTicket);
-    printf("\n");
+    printf("%d\n %s\n %s\n %s\n\n", CopyTicketTree->id, CopyTicketTree->date, CopyTicketTree->time, CopyTicketTree->resIVA);
+    PrintItemTicket(CopyTicketTree->ProductsTicket);
     PrintTicketTreePre(CopyTicketTree->left);
     PrintTicketTreePre(CopyTicketTree->right);
   }

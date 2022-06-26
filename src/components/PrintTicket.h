@@ -14,22 +14,22 @@ It receives a structure of type Ticket and prints it on screen
 #define CONFIG_TICKET_GB_LENGTH 20
 
 // Estructura de los Productos
-struct Item
+typedef struct Item
 {
     int idItem;
     char *name;
     double price;
-};
+} Item;
 
 // Estructura de los Productos del Ticket
-struct ItemTicket
+typedef struct ItemTicket
 {
     float quantity;
-    struct Item *itemInfo;
+    struct Item itemInfo;
     struct ItemTicket *next;
-};
+} ItemTicket;
 
-// Estructura de arbol aVL
+// Estructura de arbol AVL
 typedef struct Ticket
 {
     int id;
@@ -52,9 +52,10 @@ typedef struct ConfigTicket
     char messageGB[CONFIG_TICKET_GB_LENGTH];
 } Config;
 
-void printTicket(Ticket ticket)
+void printTicket(Ticket *ticket)
 {
     double total = 0;
+    /*
     Config config;
 
     printf("%s", config.businessName);
@@ -62,37 +63,31 @@ void printTicket(Ticket ticket)
     printf("%s", config.phone);
     printf("%s", config.postalCode);
     printf("%s\n", config.cuit);
+    */
     printf("**************************\n");
     printf("----------TICKET----------\n");
     printf("**************************\n");
+    printf("ID del ticket: %d\n", ticket->id);
     printf("Descripcion\t\tCantidad\t\tPrecio Unitario\t\tPrecio\n");
-    // Mostrar productos
-    // Esto implica recorrer la lista de productos e ir mostrando
 
-    while (ticket.ProductsTicket->next)
+    // printf("Cantidad: %f", ticket.ProductsTicket->quantity);
+
+    // Show products
+    // For that, we need to range over the products
+    // We create a new ticket, to not change the original one
+    Ticket *ticketSearch = ticket;
+    do
     {
-        printf("Nombre: %s\n", ticket.ProductsTicket->itemInfo->name);
-        printf("Cantidad: %d", ticket.ProductsTicket->quantity);
-        ticket.ProductsTicket = ticket.ProductsTicket->next;
-    }
-    // Mostrar el total
+        printf("Codigo producto: %d\n", ticketSearch->ProductsTicket->itemInfo.idItem);
+        printf("Nombre: %s\n", ticketSearch->ProductsTicket->itemInfo.name);
+        printf("Precio unitario: $ %.2f\n", ticketSearch->ProductsTicket->itemInfo.price);
+        printf("Cantidad: %.2f\n", ticketSearch->ProductsTicket->quantity);
+        ticketSearch->ProductsTicket = ticketSearch->ProductsTicket->next;
+    } while (ticketSearch->ProductsTicket->next);
+
+    // Print the total
     printf("TOTAL\t\t\t\t\t\t\t\t\t %lf\n", total);
 
     // Saludo
-    printf("%s", config.messageGB);
+    // printf("%s", config.messageGB);
 }
-/*
-void printProduct() {
-    struct nodo *reco = raiz;
-    printf("Lista completa.\n");
-    while (reco != NULL)
-    {
-        printf("%i ", reco->info);
-        reco = reco->sig;
-    }
-    printf("\n");
-}
-*/
-/*
-void
-*/

@@ -1,27 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void InsertTicket(){
-  // printf("PROBLEMS 1\n");
-  struct TicketTree *pNewTicketTreeItem = (struct TicketTree *)malloc(sizeof(struct TicketTree));
-  // printf("PROBLEMS 2\n");
+  struct Ticket *pNewTicketTreeItem = (struct Ticket *)malloc(sizeof(struct Ticket));
+  int cant_prod_min = 0;
 
   // DATOS DEL TICKET
   // id
   pNewTicketTreeItem->id = id_tickets;
   // Hora y Fecha
-  pNewTicketTreeItem->ticket.time = getTime();
-  // // printf("TIME: %s\n", pNewTicketTreeItem->ticket.time);
-  pNewTicketTreeItem->ticket.date = getDate();
-  // // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
+  strcpy(pNewTicketTreeItem->date, getDate());
+  strcpy(pNewTicketTreeItem->time, getTime());
 
   // Items del ticket - Dont work
-  // InsertItemTicket(); 
-  // pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
+  while (cant_prod_min <= 3){
+    InsertItemTicket();
+    cant_prod_min++;
+  }
+  pNewTicketTreeItem->ProductsTicket = pAuxItemTicket;
 
 
   // Responsabilidad frente al IVA del emisor
-  pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
+  strcpy(pNewTicketTreeItem->resIVA, IVAResponsability());
 
 
   pNewTicketTreeItem->left = NULL;
@@ -32,7 +33,7 @@ void InsertTicket(){
   if (pTicketTree == NULL){
     pTicketTree = pNewTicketTreeItem;
   } else{
-    struct TicketTree *previus, *current;
+    struct Ticket *previus, *current;
     previus = NULL;
     current = pTicketTree;
     while (current != NULL){
@@ -59,19 +60,18 @@ void InsertTicket(){
 
 void PrintItemTicket(struct ItemTicket *pItemTicket){
   printf("PrintItemTicket\n");
-  printf("Cantidad: %d\n", pItemTicket->quantity);
-  printf("Nombre Producto: %s\n", pItemTicket->itemInfo->name);
-  printf("Unidad: %s\n", pItemTicket->itemInfo->unit);
+  printf("Cantidad: %f\n", pItemTicket->quantity);
+  printf("Producto: %s\n", pItemTicket->itemInfo->name);
   printf("Precio: %.2f\n", pItemTicket->itemInfo->price);
 }
 
-void PrintTicketTreePre(struct TicketTree *CopyTicketTree){
+void PrintTicketTreePre(struct Ticket *CopyTicketTree){
   if (CopyTicketTree != NULL){
     printf("ID: %u \n", CopyTicketTree->id);
-    printf("Fecha: %s \n", CopyTicketTree->ticket.date);
-    printf("Hora: %s \n", CopyTicketTree->ticket.time);
+    printf("Fecha: %s \n", CopyTicketTree->date);
+    printf("Hora: %s \n", CopyTicketTree->time);
     printf("Leyenda: A CONSUMIDOR FINAL \n");
-    printf("Responsabilidad IVA: %s \n", CopyTicketTree->ticket.resIVA);
+    printf("Responsabilidad IVA: %s \n", CopyTicketTree->resIVA);
     // printf("\n");
     // PrintItemTicket(CopyTicketTree->ticket.itemTicket);
     printf("\n");
@@ -81,7 +81,7 @@ void PrintTicketTreePre(struct TicketTree *CopyTicketTree){
 }
 
 
-void PrintTicketTreeEntre(struct TicketTree *CopyTicketTree){
+void PrintTicketTreeEntre(struct Ticket *CopyTicketTree){
   if (CopyTicketTree != NULL){
     PrintTicketTreeEntre(CopyTicketTree->left);
     printf("ID: %u \n", CopyTicketTree->id);
@@ -89,7 +89,7 @@ void PrintTicketTreeEntre(struct TicketTree *CopyTicketTree){
   }
 }
 
-void PrintTicketTreePost(struct TicketTree *CopyTicketTree){
+void PrintTicketTreePost(struct Ticket *CopyTicketTree){
   if (CopyTicketTree != NULL){
     PrintTicketTreePost(CopyTicketTree->left);
     PrintTicketTreePost(CopyTicketTree->right);

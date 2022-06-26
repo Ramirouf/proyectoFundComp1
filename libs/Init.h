@@ -12,6 +12,7 @@
 
 #define TICKET_DATE_LENGTH 11 // dd/mm/yyyy (10) mas el \0 (11 )
 #define TICKET_TIME_LENGTH 9 // hh:mm:ss (8) mas el \0 (9)
+#define TICKET_RES_IVA_LENGTH 25
 
 #define CANT_PRODUCTS 10
 
@@ -34,16 +35,16 @@ struct Item{
 // Estructura de los Productos del Ticket
 struct ItemTicket{
   float quantity;
-  struct Item itemInfo;
+  struct Item *itemInfo;
   struct ItemTicket *next;
 };
 
 // Estructura de arbol aVL
 struct Ticket{
   int id;
-  char *date;
-  char *time;
-  char *resIVA;
+  char date[TICKET_DATE_LENGTH];
+  char time[TICKET_TIME_LENGTH];
+  char resIVA[TICKET_RES_IVA_LENGTH];
   struct ItemTicket *ProductsTicket;
   struct Ticket *left;
   struct Ticket *right;

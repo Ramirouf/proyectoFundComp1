@@ -3,10 +3,21 @@
 #include<stdlib.h>
 #include<string.h>
 
+struct Item *GetProductById(int id){
+  struct ListProducts *product = pListProducts;
+  while (product != NULL){
+    if (product->itemInfo.idItem == id){
+      return &product->itemInfo;
+    }
+    product = product->next;
+  }
+
+  return NULL;
+}
+
 void InsertItemTicket(){
   int option;
   struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
-
 
   PrintListProducts();
   printf("\nIngrese el codigo del producto: ");
@@ -14,9 +25,10 @@ void InsertItemTicket(){
 
   if (option >= 1 && option <= 10){
     // Info del nuevo item
+    pNewItemTicket->itemInfo = GetProductById(option);
     // Pedir la cantidad de productos
     printf("\nIngrese la cantidad: ");
-    scanf("%d", &pNewItemTicket->quantity);
+    scanf("%f", &pNewItemTicket->quantity);
     printf("\n");
 
     // Enlazar la nueva lista con la anterior

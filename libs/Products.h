@@ -7,7 +7,7 @@ void PrintListProducts(){
   printf("LISTA DE PRODUCTOS\n");
   struct ListProducts *product = pListProducts;
   while (product != NULL){
-    printf("%d. %s  $%.2lf\n", product->itemInfo.idItem, product->itemInfo.name, product->itemInfo.price);
+    printf("%d. %s $%.2lf\n", product->itemInfo.idItem, product->itemInfo.name, product->itemInfo.price);
     product = product->next;
   }
   printf("\n");
@@ -27,7 +27,7 @@ void AddProduct(char *infoProduct){
   // printf("name: %s\n", newProduct->itemInfo.name);
   // price
   token = strtok(NULL, ",");
-  sscanf(token, "%lf", &newProduct->itemInfo.price);
+  newProduct->itemInfo.price = atof(token);
   // printf("price: %.2lf\n", newProduct->itemInfo.price);
 
   // Agregar a la lista de productos
@@ -49,14 +49,12 @@ void SetListProducts(){
   char *filename = "./public/products.txt";
   char *mode = "r";
   fp = fopen(filename, mode);
-  if (fp == NULL)
-    exit(EXIT_FAILURE);
+  if (fp == NULL) exit(EXIT_FAILURE);
 
   while ((read = getline(&line, &len, fp)) != -1){
     // printf("%s", line);
     AddProduct(line);
   }
 
-  free(line);
   fclose(fp);
 }

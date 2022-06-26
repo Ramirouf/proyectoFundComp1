@@ -7,6 +7,9 @@
 #define CONFIG_TICKET_CUIT_LENGTH 11
 #define CONFIG_TICKET_GB_LENGTH 20
 
+#define ITEM_NAME_LENGTH 40
+
+
 #define TICKET_DATE_LENGTH 11 // dd/mm/yyyy (10) mas el \0 (11 )
 #define TICKET_TIME_LENGTH 9 // hh:mm:ss (8) mas el \0 (9)
 
@@ -24,7 +27,7 @@ struct ConfigTicket{
 // Estructura de los Productos
 struct Item{
   int idItem;
-  char *name;
+  char name[ITEM_NAME_LENGTH];
   double price;
 };
 

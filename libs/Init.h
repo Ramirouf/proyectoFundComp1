@@ -23,9 +23,15 @@ struct ConfigTicket{
 };
 
 struct Item{
-  char *name;
-  char *unit;
+  int id;
+  char name[50];
+  // char unit;
   double price;
+};
+
+struct ListProducts{
+  struct Item itemInfo;
+  struct ListProducts *next;
 };
 
 struct ItemTicket{
@@ -51,19 +57,5 @@ struct TicketTree{
 // Inicializacion de variables globales y estructuras
 struct TicketTree *pTicketTree = NULL;
 struct ItemTicket *pAuxItemTicket = NULL;
+struct ListProducts *pListProducts = NULL;
 unsigned int id_tickets = 1;
-
-
-// Productos para ser usados en el ticket en forma de vector
-struct Item products[CANT_PRODUCTS] = {
-  {"Fideo", "c/u", 9.99},
-  {"Sal", "c/u", 150},
-  {"Caldo de pollo", "c/u", 60},
-  {"Mayonesa", "c/u", 550},
-  {"Pure de tomate", "c/u", 114.5},
-  {"Pollo", "kg", 100},
-  {"Queso", "kg", 120.2},
-  {"Tomate", "kg", 99.9},
-   {"Muslo", "kg", 150},
-  {"Lechuga", "kg", 100.3}
-};

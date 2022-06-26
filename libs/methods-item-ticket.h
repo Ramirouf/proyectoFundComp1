@@ -3,14 +3,6 @@
 #include<stdlib.h>
 #include<string.h>
 
-
-void ListOfItems(){
-  printf("LISTA DE PRODUCTOS\n");
-  for (int i = 0; i < CANT_PRODUCTS; i++){
-    printf("%d. %s\n", i + 1, products[i].name);
-  }
-}
-
 void InsertItemTicket(){
   int option;
   struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));

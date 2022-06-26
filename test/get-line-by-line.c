@@ -13,8 +13,8 @@ int main(void){
     exit(EXIT_FAILURE);
 
   while ((read = getline(&line, &len, fp)) != -1){
-    printf("Retrieved line of length %zu :\n", read);
     printf("%s", line);
+
   }
 
   free(line);

@@ -1,4 +1,10 @@
-hello word 1
-hello word 2
-hello word 3
-hello word 45
+1,Fideo,9.99
+2,Sal,150
+3,Caldo de pollo,60
+4,Mayonesa,550
+5,Pure de tomate,114.5
+6,Pollo,100
+7,Queso,120.2
+8,Tomate,99.9
+9,Muslo,150
+10,Lechuga,100.3

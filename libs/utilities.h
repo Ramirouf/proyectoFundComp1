@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 void SeparateCross(int cant){
   for (int i = 1; i < cant; i++) printf("*");
   printf("\n");

@@ -7,7 +7,7 @@ void PrintListProducts(){
   printf("LISTA DE PRODUCTOS\n");
   struct ListProducts *product = pListProducts;
   while (product != NULL){
-    printf("%d. %s \n", product->itemInfo.id, product->itemInfo.name);
+    printf("%d. %s  $%.2lf\n", product->itemInfo.idItem, product->itemInfo.name, product->itemInfo.price);
     product = product->next;
   }
   printf("\n");
@@ -20,8 +20,7 @@ void AddProduct(char *infoProduct){
 
   // id
   char *token = strtok(infoProduct, ",");
-  newProduct->itemInfo.id = atoi(token);
-  // printf("id: %d\n", newProduct->itemInfo.id);
+  newProduct->itemInfo.idItem = atoi(token);
   // name
   token = strtok(NULL, ",");
   strcpy(newProduct->itemInfo.name, token);
@@ -59,5 +58,5 @@ void SetListProducts(){
   }
 
   free(line);
-  exit(EXIT_SUCCESS);
+  fclose(fp);
 }

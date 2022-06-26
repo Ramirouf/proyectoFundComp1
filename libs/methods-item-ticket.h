@@ -8,22 +8,15 @@ void InsertItemTicket(){
   struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
 
 
-  ListOfItems();
+  PrintListProducts();
   printf("\nIngrese el codigo del producto: ");
   scanf("%d", &option);
 
   if (option >= 1 && option <= 10){
     // Info del nuevo item
-    pNewItemTicket->itemInfo->name = products[option - 1].name;
-    // printf("Name product:  %s\n", pNewItemTicket->itemInfo->name);
-    pNewItemTicket->itemInfo->unit = products[option - 1].unit;
-    // printf("Unit product:  %s\n", pNewItemTicket->itemInfo->unit);
-    pNewItemTicket->itemInfo->price = products[option - 1].price;
-    // printf("Price product:  %.2f\n", pNewItemTicket->itemInfo->price);
     // Pedir la cantidad de productos
     printf("\nIngrese la cantidad: ");
     scanf("%d", &pNewItemTicket->quantity);
-    // printf("Quantity product:  %d\n", pNewItemTicket->quantity);
     printf("\n");
 
     // Enlazar la nueva lista con la anterior

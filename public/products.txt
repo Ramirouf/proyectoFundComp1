@@ -1,0 +1,10 @@
+10,Fidedawkjdakwjdkawjdakdjakdjkawdjalkdkawjkldao,9.99
+9,Sal,150
+8,Caldo de pollo,60
+7,Mayonesa,550
+6,Pure de tomate,114.5
+5,Pollo,100
+4,Queso,120.2
+3,Tomate,99.9
+2,Muslo,150
+1,Lechuga,100.3

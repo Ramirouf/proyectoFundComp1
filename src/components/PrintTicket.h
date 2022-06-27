@@ -76,6 +76,8 @@ void printTicket(Ticket *ticket)
     // For that, we need to range over the products
     // We create a new ticket, to not change the original one
     Ticket *ticketSearch = ticket;
+    // struct Ticket *ticketSearch = (struct Ticket *)malloc(sizeof(struct Ticket));
+    // ticketSearch = ticket;
     do
     {
         printf("Codigo producto: %d\n", ticketSearch->ProductsTicket->itemInfo.idItem);
@@ -83,9 +85,9 @@ void printTicket(Ticket *ticket)
         printf("Precio unitario: $ %.2f\n", ticketSearch->ProductsTicket->itemInfo.price);
         printf("Cantidad: %.2f\n", ticketSearch->ProductsTicket->quantity);
         ticketSearch->ProductsTicket = ticketSearch->ProductsTicket->next;
-        productTotal = ticketSearch->ProductsTicket->itemInfo.price * ticketSearch->ProductsTicket->quantity;
-        printf("Valor: %.2f\n", productTotal);
-        total += productTotal;
+        // productTotal = ticketSearch->ProductsTicket->itemInfo.price * ticketSearch->ProductsTicket->quantity;
+        // printf("Valor: %.2f\n", productTotal);
+        // total += productTotal;
     } while (ticketSearch->ProductsTicket->next);
 
     // Print the total

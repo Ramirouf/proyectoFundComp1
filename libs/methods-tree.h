@@ -21,6 +21,7 @@ void InsertTicket()
   while (seguir)
   {
     seguir = InsertItemTicket();
+    printf("SEGUIR: %d\n", seguir);
     if (seguir)
       cant_prod_min++;
   }
@@ -130,21 +131,24 @@ void PrintManyTimes(char *string, int times)
 
 void PrintItemTicket(struct ItemTicket *pItemTicket)
 {
-  int column_width_product = 30;
-  int column_width_quantity = 10;
-  int column_width_price = 10;
+  int column_width_product = 40;
   int column_width_subtotal = 10;
+  char text[10];
+  char price[10];
   while (pItemTicket != NULL)
   {
     PrintItemTable(pItemTicket->itemInfo->name, column_width_product);
+    PrintItemTable("", column_width_subtotal);
+    printf("\n");
     // PrintItemTable(DoubleToString(pItemTicket->quantity), column_width_quantity);
-    printf("\n%.2f x %.2f", pItemTicket->quantity, pItemTicket->itemInfo->price);
+    // printf("\n%.2f x %.2f  ", pItemTicket->quantity, pItemTicket->itemInfo->price);
+    sprintf(text, "%.2f x %.2f", pItemTicket->quantity, pItemTicket->itemInfo->price);
+    sprintf(price, "$ %.2f", pItemTicket->itemInfo->price * pItemTicket->quantity);
+    PrintItemTable(text, column_width_product);
     // PrintItemTable(DoubleToString(pItemTicket->itemInfo->price), column_width_price);
-    PrintItemTable(DoubleToString(pItemTicket->itemInfo->price * pItemTicket->quantity), column_width_subtotal);
+    PrintItemTable(price, column_width_subtotal);
     printf("\n");
     pItemTicket = pItemTicket->next;
-    if (!pItemTicket)
-      printf("\n\n\n");
   }
 
   printf("\n\n");
@@ -152,9 +156,7 @@ void PrintItemTicket(struct ItemTicket *pItemTicket)
 
 void PrintTicket(struct Ticket *pTicket)
 {
-  int column_width_product = 30;
-  int column_width_quantity = 10;
-  int column_width_price = 10;
+  int column_width_product = 40;
   int column_width_subtotal = 10;
 
   // Imprimir los metadatos del ticket
@@ -166,14 +168,10 @@ void PrintTicket(struct Ticket *pTicket)
 
   // Imprimir el Header de los items del ticket
   PrintItemTable("Producto", column_width_product);
-  PrintItemTable("Cantidad", column_width_quantity);
-  PrintItemTable("Precio", column_width_price);
   PrintItemTable("Subtotal", column_width_subtotal);
   printf("\n");
   // Subline header
   PrintItemTable("--------", column_width_product);
-  PrintItemTable("--------", column_width_quantity);
-  PrintItemTable("------", column_width_price);
   PrintItemTable("--------", column_width_subtotal);
   printf("\n\n");
 

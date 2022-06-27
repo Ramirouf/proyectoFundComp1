@@ -3,21 +3,24 @@
 #include "./momentC.h"
 #include "./createProductlist.h"
 // Estructura de los Productos
-struct Item {
+struct Item
+{
 	int idItem;
 	char *name;
 	double price;
 };
 
 // Estructura de los Productos del Ticket
-struct ItemTicket{
+struct ItemTicket
+{
 	float quantity;
 	struct Item *itemInfo;
 	struct ItemTicket *next;
 };
 
 // Estructura de arbol aVL
-struct Ticket {
+struct Ticket
+{
 	int id;
 	char *date;
 	char *time;
@@ -42,7 +45,6 @@ struct Ticket {
 // 	struct TicketTree *right;
 // };
 
-
 // Carlos
 
 // void InsertTicket(){
@@ -60,18 +62,14 @@ struct Ticket {
 //   // // printf("DATE: %s\n", pNewTicketTreeItem->ticket.date);
 
 //   // Items del ticket - Dont work
-//   // InsertItemTicket(); 
+//   // InsertItemTicket();
 //   // pNewTicketTreeItem->ticket.itemTicket = pAuxItemTicket;
-
 
 //   // Responsabilidad frente al IVA del emisor
 //   pNewTicketTreeItem->ticket.resIVA = IVAResponsability();
 
-
 //   pNewTicketTreeItem->left = NULL;
 //   pNewTicketTreeItem->right = NULL;
-
-
 
 //   if (pTicketTree == NULL){
 //     pTicketTree = pNewTicketTreeItem;
@@ -101,58 +99,65 @@ struct Ticket {
 //   id_tickets++;
 // }
 
-void PrintMessageError(char *message, char *type){
-  printf("\n");
-  printf("%s: %s\n", type, message);
-  printf("\n");
+void PrintMessage(char *message, char *type)
+{
+	printf("\n");
+	printf("%s: %s\n", type, message);
+	printf("\n");
 }
 
-char *IVAResponsability(){
-  int option;
-  char *responsability[] = { "IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo",
-  "Monotributista Social" };
+char *IVAResponsability()
+{
+	int option;
+	char *responsability[] = {"IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo",
+							  "Monotributista Social"};
 
-  do{
-    printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
-    printf("1. IVA Responsable Inscripto\n");
-    printf("2. IVA no Responsable\n");
-    printf("3. IVA exento\n");
-    printf("4. Responsable Monotributo\n");
-    printf("5. Monotributista Social\n");
+	do
+	{
+		printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
+		printf("1. IVA Responsable Inscripto\n");
+		printf("2. IVA no Responsable\n");
+		printf("3. IVA exento\n");
+		printf("4. Responsable Monotributo\n");
+		printf("5. Monotributista Social\n");
 
-    printf("Ingrese una opcion: ");
-    scanf("%d", &option);
+		printf("Ingrese una opcion: ");
+		scanf("%d", &option);
 
-    if (option < 1 || option > 5){
-      PrintMessageError("Opcion invalida", "Error");
-    }
-  } while (option < 1 || option > 5);
+		if (option < 1 || option > 5)
+		{
+			PrintMessage("Opcion invalida", "Error");
+		}
+	} while (option < 1 || option > 5);
 
-  return responsability[option - 1];
+	return responsability[option - 1];
 }
 
 // Carlos
 
-
 // Funcion para calcular la altura
-int height(struct Ticket *N) {
-	if (N == NULL) return 0;
+int height(struct Ticket *N)
+{
+	if (N == NULL)
+		return 0;
 	return N->height;
 }
 
 // Funcion para hallar el maximo entre dos enteros
-int max(int a, int b){
+int max(int a, int b)
+{
 	return (a > b) ? a : b;
 }
 
 /* Funcion que crea un nuevo Ticket. */
-struct Ticket* newTicket(int id){
-	struct Ticket* Ticket = (struct Ticket*)malloc(sizeof(struct Ticket));
+struct Ticket *newTicket(int id)
+{
+	struct Ticket *Ticket = (struct Ticket *)malloc(sizeof(struct Ticket));
 	Ticket->id = id;
 	Ticket->date = getDate(); // Obtiene la fecha actual
 	Ticket->time = getTime(); // Obtiene la hora actual
 	Ticket->resIVA = IVAResponsability();
-	Ticket->ItemTicket = CreateProductList() ;
+	Ticket->ItemTicket = CreateProductList();
 
 	// Generar Lista de Productos - empty
 
@@ -171,10 +176,11 @@ struct Ticket *rightRotate(struct Ticket *y)
 	x->right = y;
 	y->left = T2;
 	// Actualizacion de alturas
-	y->height = max(height(y->left), height(y->right))+1;
-	x->height = max(height(x->left), height(x->right))+1;
+	y->height = max(height(y->left), height(y->right)) + 1;
+	x->height = max(height(x->left), height(x->right)) + 1;
 	// devuelve nueva raiz
-	return x; }
+	return x;
+}
 // Funcion para rotar a la izquierda el sub�rbol x
 struct Ticket *leftRotate(struct Ticket *x)
 {
@@ -184,10 +190,11 @@ struct Ticket *leftRotate(struct Ticket *x)
 	y->left = x;
 	x->right = T2;
 	// Actualizacion de alturas
-	x->height = max(height(x->left), height(x->right))+1;
-	y->height = max(height(y->left), height(y->right))+1;
+	x->height = max(height(x->left), height(x->right)) + 1;
+	y->height = max(height(y->left), height(y->right)) + 1;
 	// retorna nueva raiz
-	return y; }
+	return y;
+}
 // Calcular el FB del Ticket
 int getBalance(struct Ticket *N)
 {
@@ -195,11 +202,11 @@ int getBalance(struct Ticket *N)
 		return 0;
 	return height(N->left) - height(N->right);
 }
-struct Ticket* insert(struct Ticket* Ticket, int id)
+struct Ticket *insert(struct Ticket *Ticket, int id)
 {
 	/* 1. Se realiza la rotacion normal*/
 	if (Ticket == NULL)
-		return(newTicket(id));
+		return (newTicket(id));
 	if (id < Ticket->id)
 		Ticket->left = insert(Ticket->left, id);
 	else if (id > Ticket->id)
@@ -208,7 +215,7 @@ struct Ticket* insert(struct Ticket* Ticket, int id)
 		return Ticket;
 	/* 2. Actualizar altura del antecesor */
 	Ticket->height = 1 + max(height(Ticket->left),
-						   height(Ticket->right));
+							 height(Ticket->right));
 	/* 3. Conseguir el FB de ese antepasado para saber si esta equilibrado*/
 	int balance = getBalance(Ticket);
 	// Si esa desbalanceado hay 4 casos
@@ -234,30 +241,29 @@ struct Ticket* insert(struct Ticket* Ticket, int id)
 	return Ticket;
 }
 /* Dado un arbol ABB no vacio, devuelve el Ticket con el valor de clave minimo encontrado */
-struct Ticket * minValueTicket(struct Ticket* Ticket)
+struct Ticket *minValueTicket(struct Ticket *Ticket)
 {
-	struct Ticket* current = Ticket;
+	struct Ticket *current = Ticket;
 	/* bucle hacia abajo para encontrar la rama mas izquierda*/
 	while (current->left != NULL)
 		current = current->left;
 	return current;
 }
 // Funcion recursiva para eliminar el Ticket.
-struct Ticket* deleteTicket(struct Ticket* root, int id)
+struct Ticket *deleteTicket(struct Ticket *root, int id)
 {
 	// paso 1: realizer el borrado normal
 	if (root == NULL)
 		return root;
-	if ( id < root->id )
+	if (id < root->id)
 		root->left = deleteTicket(root->left, id);
-	else if( id > root->id )
+	else if (id > root->id)
 		root->right = deleteTicket(root->right, id);
 	else
 	{
-		if( (root->left == NULL) || (root->right == NULL) )
+		if ((root->left == NULL) || (root->right == NULL))
 		{
-			struct Ticket *temp = root->left ? root->left :
-				root->right;
+			struct Ticket *temp = root->left ? root->left : root->right;
 			if (temp == NULL)
 			{
 				temp = root;
@@ -270,12 +276,13 @@ struct Ticket* deleteTicket(struct Ticket* root, int id)
 		else
 		{
 			// obtener el Ticket mas peque�o derecho
-			struct Ticket* temp = minValueTicket(root->right);
+			struct Ticket *temp = minValueTicket(root->right);
 			// copia los datos en este Ticket
 			root->id = temp->id;
 			// Elimina
 			root->right = deleteTicket(root->right, temp->id);
-		} }
+		}
+	}
 	// Si el arbol tiene un solo Ticket
 	if (root == NULL)
 		return root;
@@ -306,8 +313,10 @@ struct Ticket* deleteTicket(struct Ticket* root, int id)
 	return root;
 }
 // Funcion para imprimir el arbol en preorden
-void preOrder(struct Ticket *root) {
-	if(root != NULL) {
+void preOrder(struct Ticket *root)
+{
+	if (root != NULL)
+	{
 		printf("%d ", root->id);
 		preOrder(root->left);
 		preOrder(root->right);

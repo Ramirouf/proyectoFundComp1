@@ -56,7 +56,7 @@ int InsertItemTicket()
   }
   else
   {
-    PrintMessageError("Debe de haber al menos un producto para generar un ticket", "Error");
+    PrintMessage("Debe de haber al menos un producto para generar un ticket", "Error");
     return 1;
   }
 }

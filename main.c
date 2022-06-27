@@ -13,24 +13,38 @@
 #include <conio.h>
 // Testing
 
-struct ConfigTicket GetConfigTicket(char *mode)
+struct ConfigTicket *GetConfigTicket()
 {
-	// File mode - https://www.tutorialesprogramacionya.com/cya/detalleconcepto.php?punto=80&codigo=80&inicio=75
-	struct ConfigTicket config;
-	FILE *fptr; // File pointer
+	struct ConfigTicket *config = malloc(sizeof(struct ConfigTicket));
+	FILE *fptr;
 	char *filename = "./public/ticket_config.txt";
+	char *mode = "r";
+	char *line = NULL;
+	size_t len = 0;
+	size_t read;
 
-	fptr = fopen(filename, mode); // Open the file
-
-	// Program exits if the file pointer returns NULL.
+	fptr = fopen(filename, mode);
 	if (fptr == NULL)
-	{
-		printf("Error! opening file");
-		exit(1);
-	}
+		exit(EXIT_FAILURE);
 
-	fread(&config, sizeof(config), 1, fptr);
+	// while ((read = getline(&line, &len, fptr)) != -1){
+	// 	printf("%s", line);
+	// }
 
+	read = getline(&line, &len, fptr);
+	sprintf(config->businessName, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->address, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->phone, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->postalCode, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->cuit, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->messageGB, "%s", line);
+
+	free(line);
 	fclose(fptr);
 
 	return config;
@@ -38,75 +52,70 @@ struct ConfigTicket GetConfigTicket(char *mode)
 
 void PreviewTicket()
 {
-	// Ticket data
-	struct ConfigTicket configT;
-	char *mode = "r";
-	configT = GetConfigTicket(mode);
-	// Ticket Dimension
-	int WIDTH_TICKET = 50;
-
-	MenuTitle("Preview Ticket");
-	// Line Top
-	SeparateLine(WIDTH_TICKET);
-
-	// Print Text in the middle
-	PrintInTheMiddle(configT.businessName, WIDTH_TICKET);
-
-	SeparateCross(WIDTH_TICKET);
-	SeparateCross(WIDTH_TICKET);
-
-	// Line Bottom
-	SeparateLine(WIDTH_TICKET);
+	// char *mode = "r";
+	// // Ticket data
+	// struct ConfigTicket *configT = GetConfigTicket(mode);
 }
 
 void PrintConfigTicket()
 {
-	char *mode = "at";
-	struct ConfigTicket config;
-	config = GetConfigTicket(mode);
+	struct ConfigTicket *configT = GetConfigTicket();
 
 	// Print the text from the file.
-	printf("INFORMACION DEL TICKET\n");
-	printf("- Razon Social: %s\n", config.businessName);
-	printf("- Direccion: %s\n", config.address);
-	printf("- Telefono: %s\n", config.phone);
-	printf("- Codigo Postal: %s\n", config.postalCode);
-	printf("- CUIT: %s\n", config.cuit);
-	printf("- Leyenda: %s\n", config.messageGB);
+	printf("INFORMACION DEL TICKET\n\n");
+	printf("Nombre de la empresa: %s", configT->businessName);
+	printf("Direccion: %s", configT->address);
+	printf("Telefono: %s", configT->phone);
+	printf("Codigo Postal: %s", configT->postalCode);
+	printf("CUIT: %s", configT->cuit);
+	printf("Mensaje de Gracias: %s", configT->messageGB);
+	printf("\n");
 }
 
 void SetConfigTicket()
 {
+	char *filename = "./public/ticket_config.txt";
+	char *mode = "w";
+
 	struct ConfigTicket config;
 
 	FILE *fptr;
-	fptr = fopen("./public/ticket_config.txt", "a+t");
+	fptr = fopen(filename, mode);
 
+	printf("ESTABLECIENDO LA CONFIGURACION DEL TICKET\n\n");
+
+	printf("Ingrese la razon social: ");
 	fflush(stdin);
-	printf("Enter business name: ");
 	gets(config.businessName);
 
-	printf("Enter address: ");
+	printf("Ingrese la direccion: ");
 	fflush(stdin);
 	gets(config.address);
 
-	printf("Enter phone: ");
+	printf("Ingrese el telefono: ");
 	fflush(stdin);
 	gets(config.phone);
 
-	printf("Enter postal code: ");
+	printf("Ingrese el codigo postal: ");
 	fflush(stdin);
 	gets(config.postalCode);
 
-	printf("Enter CUIT: ");
+	printf("Ingrese el CUIT: ");
 	fflush(stdin);
 	gets(config.cuit);
 
-	printf("Enter message of thanks: ");
+	printf("Ingrese el mensaje de Leyenda(mensaje al final del Ticket): ");
 	fflush(stdin);
 	gets(config.messageGB);
 
-	fwrite(&config, sizeof(config), 1, fptr);
+	fprintf(fptr, "%s\n", config.businessName);
+	fprintf(fptr, "%s\n", config.address);
+	fprintf(fptr, "%s\n", config.phone);
+	fprintf(fptr, "%s\n", config.postalCode);
+	fprintf(fptr, "%s\n", config.cuit);
+	fprintf(fptr, "%s\n", config.messageGB);
+
+	printf("\nTICKET CONFIGURADO CORRECTAMENTE\n");
 
 	fclose(fptr);
 }
@@ -119,7 +128,7 @@ void TicketSettings()
 	{
 		MenuTitle("CONFIGURACION DE TICKET");
 		printf("1) Ver informacion\n");
-		printf("2) Cambiar informacion\n");
+		printf("2) Establecer informacion\n");
 		printf("3) Preview Ticket\n");
 		printf("4) Volver atras\n");
 
@@ -131,19 +140,52 @@ void TicketSettings()
 		switch (option)
 		{
 		case 1:
-			printf("\n");
-			PrintConfigTicket();
-			printf("\n\n");
+			if (setTicket)
+			{
+				printf("\n");
+				PrintConfigTicket();
+				printf("\n\n");
+			}
+			else
+			{
+				PrintMessage("Todavia no se establecio la configuracion del ticket", "Atencion");
+			}
 			break;
 		case 2:
-			printf("\n");
-			SetConfigTicket();
-			printf("\n\n");
+			if (setTicket)
+			{
+				char selection;
+				PrintMessage("Ya se establecio la configuracion del ticket, desea reestablecerla? (s/n)", "Atencion");
+				scanf("%c", &selection);
+				if (selection == 's')
+				{
+					SetConfigTicket();
+				}
+				else
+				{
+					PrintMessage("No hubo cambios", "Info");
+				}
+			}
+			else
+			{
+				printf("\n");
+				SetConfigTicket();
+				printf("\n\n");
+			}
+			// Ya se configuro el ticket
+			setTicket = 1;
 			break;
 		case 3:
-			printf("\n");
-			PreviewTicket();
-			printf("\n\n");
+			if (setTicket)
+			{
+				printf("\n");
+				PreviewTicket();
+				printf("\n\n");
+			}
+			else
+			{
+				PrintMessage("Todavia no se establecio la configuracion del ticket", "Atencion");
+			}
 			break;
 		case 4:
 			// Vuelve al menu principal

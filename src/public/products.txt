@@ -1,6 +1,6 @@
-10,Fideo,9.99
+10,Fideos,9.99
 9,Sal,150
-8,Caldo de pollo,60
+8,Muslo de pollo,60
 7,Mayonesa,550
 6,Pure de tomate,114.5
 5,Pollo,100

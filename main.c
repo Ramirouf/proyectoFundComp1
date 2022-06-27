@@ -156,22 +156,8 @@ void TicketSettings()
 
 void GenerateTicket()
 {
-	// Pasos para generar un ticket
-	// 1. Elegir un item del menu (se muestra el nombre y el precio)
-	// 2. Elegir la cantidad de items
-	// 3. Agregar el item a la lista de items
-	/*
-		4. Una vez que se termina de agregar todos los items, se muestra todos los items, se muestra el total,
-		se puede modificar y/o eliminar items, se puede agregar nuevos items.
-	*/
-	// 5. Se guarda la lista de items en un archivo
-	// 6. Se imprime el ticket
-
-	// Implementacion
-	// 1. Elegir un item del menu (se muestra el nombre y el precio)
-
-	// TESTING
-	printf("AGREGANDO TICKET...\n");
+	// Ticket data
+	printf("GENERANDO UN NUEVO TICKET\n\n");
 	printf("Ingrese codigo de producto -1 para terminar\n");
 	InsertTicket();
 	printf("TICKET GENERADO\n");
@@ -179,7 +165,13 @@ void GenerateTicket()
 
 void ViewAllTickets()
 {
-	// Imprimir direccion de memoria de todos los tickets
+	// Si no hay tickets, no se muestra nada
+	if (pTicketTree == NULL)
+	{
+		PrintMessage("No hay tickets aun", "Info");
+		return;
+	}
+
 	printf("TODOS LOS TICKETS\n");
 	PrintTicketTreePre(pTicketTree);
 	printf("\nFIN.\n");

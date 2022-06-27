@@ -161,6 +161,7 @@ struct Ticket *newTicket(int id){
 
 	return Ticket;
 }
+
 // Funcion para rotar a la derecha el subarbol y
 struct Ticket *rightRotate(struct Ticket *y){
 	struct Ticket *x = y->left;
@@ -174,6 +175,7 @@ struct Ticket *rightRotate(struct Ticket *y){
 	// devuelve nueva raiz
 	return x;
 }
+
 // Funcion para rotar a la izquierda el sub�rbol x
 struct Ticket *leftRotate(struct Ticket *x){
 	struct Ticket *y = x->right;
@@ -187,12 +189,15 @@ struct Ticket *leftRotate(struct Ticket *x){
 	// retorna nueva raiz
 	return y;
 }
+
+
 // Calcular el FB del Ticket
 int getBalance(struct Ticket *N){
 	if (N == NULL)
 		return 0;
 	return height(N->left) - height(N->right);
 }
+
 struct Ticket *insert(struct Ticket *Ticket, int id){
 	/* 1. Se realiza la rotacion normal*/
 	if (Ticket == NULL)
@@ -228,6 +233,8 @@ struct Ticket *insert(struct Ticket *Ticket, int id){
 	/* devuelve el puntero*/
 	return Ticket;
 }
+
+
 /* Dado un arbol ABB no vacio, devuelve el Ticket con el valor de clave minimo encontrado */
 struct Ticket *minValueTicket(struct Ticket *Ticket){
 	struct Ticket *current = Ticket;
@@ -236,6 +243,8 @@ struct Ticket *minValueTicket(struct Ticket *Ticket){
 		current = current->left;
 	return current;
 }
+
+
 // Funcion recursiva para eliminar el Ticket.
 struct Ticket *deleteTicket(struct Ticket *root, int id){
 	// paso 1: realizer el borrado normal
@@ -291,6 +300,7 @@ struct Ticket *deleteTicket(struct Ticket *root, int id){
 	}
 	return root;
 }
+
 // Funcion para imprimir el arbol en preorden
 void preOrder(struct Ticket *root){
 	if (root != NULL){

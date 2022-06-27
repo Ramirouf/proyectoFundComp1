@@ -59,7 +59,7 @@ struct ListProducts{
 struct Ticket *pTicketTree = NULL;
 struct ItemTicket *pAuxItemTicket = NULL;
 struct ListProducts *pListProducts = NULL;
-unsigned int id_tickets = 1;
+int id_tickets = 1;
 
 // Bandera para configurar el Ticket
 // 0: No se configuro el Ticket

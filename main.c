@@ -7,7 +7,7 @@
 
 #include "src/libs/methods-item-ticket.h"
 #include "src/libs/methods-ticket.h"
-#include "src/libs/methods-tree.h"
+#include "src/libs/method-tree.h"
 
 // Testing
 #include <conio.h>
@@ -283,7 +283,8 @@ void MenuSystem(){
 		switch (option){
 			case 1:
 				printf("\n");
-				GenerateTicket();
+				// GenerateTicket();
+				pTicketTree = insert(pTicketTree);
 				printf("\n");
 				break;
 			case 2:

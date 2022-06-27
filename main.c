@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./libs/Init.h" // Los struct del programa
-#include "./libs/Products.h"
-#include "./libs/utilities.h"
-#include "./libs/momentC.h"
+#include "src/libs/Init.h" // Los struct del programa
+#include "src/libs/utilities.h"
+#include "src/libs/Products.h"
+#include "src/libs/momentC.h"
 
-#include "./libs/methods-item-ticket.h"
-#include "./libs/methods-ticket.h"
-#include "./libs/methods-tree.h"
+#include "src/libs/methods-item-ticket.h"
+#include "src/libs/methods-ticket.h"
+#include "src/libs/methods-tree.h"
 
 // Testing
 #include <conio.h>
@@ -304,7 +304,6 @@ void MenuSystem()
 
 int main()
 {
-
 	SetListProducts(); // Inicializar la lista de productos global
 	MenuSystem();
 

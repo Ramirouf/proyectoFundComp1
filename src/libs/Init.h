@@ -5,13 +5,13 @@
 #define CONFIG_TICKET_PHONE_LENGTH 21
 #define CONFIG_TICKET_CP_LENGTH 51
 #define CONFIG_TICKET_CUIT_LENGTH 12
+#define CONFIG_TICKET_RES_IVA_LENGTH 26
 #define CONFIG_TICKET_GB_LENGTH 21
 
 #define ITEM_NAME_LENGTH 41
 
 #define TICKET_DATE_LENGTH 11 // dd/mm/yyyy (10) mas el \0 (11 )
 #define TICKET_TIME_LENGTH 9 // hh:mm:ss (8) mas el \0 (9)
-#define TICKET_RES_IVA_LENGTH 25
 
 #define CANT_PRODUCTS 10
 
@@ -21,6 +21,7 @@ struct ConfigTicket{
   char phone[CONFIG_TICKET_PHONE_LENGTH];
   char postalCode[CONFIG_TICKET_CP_LENGTH];
   char cuit[CONFIG_TICKET_CUIT_LENGTH];
+  char resIVA[CONFIG_TICKET_RES_IVA_LENGTH];
   char messageGB[CONFIG_TICKET_GB_LENGTH];
 };
 
@@ -43,7 +44,6 @@ struct Ticket{
   int id;
   char date[TICKET_DATE_LENGTH];
   char time[TICKET_TIME_LENGTH];
-  char resIVA[TICKET_RES_IVA_LENGTH];
   struct ItemTicket *ProductsTicket;
   struct Ticket *left;
   struct Ticket *right;

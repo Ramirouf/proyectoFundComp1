@@ -75,26 +75,107 @@ void InsertTicket()
   id_tickets++;
 }
 
+void PrintItemTable(char *nameProduct, int widthColumn)
+{
+  int TEXT_WIDTH = widthColumn - 1; // -1 para el espacio entre el limite del nombre y el final de la columna
+
+  /*
+    Ejemplos
+
+    Hola, buenas cómo... | // Esto pasa si la longitud del string es mayor a TEXT_WIDTH
+    Hola, buenas!        | // Esto pasa si la longitud del string es manor a TEXT_WITDH
+    Hola, buenas buenas! | // Esto pasa si la longitud del string es igual a TEXT_WIDTH
+  */
+
+  int lengthText = strlen(nameProduct);
+  for (int i = 0; i < widthColumn; i++)
+  {
+    if ((lengthText > TEXT_WIDTH) && (i >= (TEXT_WIDTH - 3)))
+    {
+      if (i == TEXT_WIDTH)
+        printf(" ");
+      else
+        printf(".");
+    }
+    else
+    {
+      if (i < lengthText)
+      {
+        printf("%c", nameProduct[i]);
+      }
+      else
+      {
+        printf(" ");
+      }
+    }
+  }
+}
+
+char *DoubleToString(double number)
+{
+  char *string = malloc(sizeof(char) * 10);
+  sprintf(string, "%.2lf", number);
+  return string;
+}
+
+void PrintManyTimes(char *string, int times)
+{
+  int i;
+  for (i = 0; i < times; i++)
+  {
+    printf("%s", string);
+  }
+}
+
 void PrintItemTicket(struct ItemTicket *pItemTicket)
 {
+  int column_width_product = 30;
+  int column_width_quantity = 10;
+  int column_width_price = 10;
+  int column_width_subtotal = 10;
   while (pItemTicket != NULL)
   {
-    printf(" %s\n %.2f x %.2f \t\t $%.2f\n",
-           pItemTicket->itemInfo->name, pItemTicket->quantity,
-           pItemTicket->itemInfo->price,
-           pItemTicket->quantity * pItemTicket->itemInfo->price);
-
+    PrintItemTable(pItemTicket->itemInfo->name, column_width_product);
+    PrintItemTable(DoubleToString(pItemTicket->quantity), column_width_quantity);
+    PrintItemTable(DoubleToString(pItemTicket->itemInfo->price), column_width_price);
+    PrintItemTable(DoubleToString(pItemTicket->itemInfo->price), column_width_subtotal);
+    printf("\n");
     pItemTicket = pItemTicket->next;
     if (!pItemTicket)
       printf("\n\n\n");
   }
+
+  printf("\n\n");
 }
 
 void PrintTicketTreePre(struct Ticket *CopyTicketTree)
 {
+  int column_width_product = 30;
+  int column_width_quantity = 10;
+  int column_width_price = 10;
+  int column_width_subtotal = 10;
   if (CopyTicketTree != NULL)
   {
-    printf(" ID del ticket: %d\n Fecha: %s\n Hora: %s\n %s\n\n", CopyTicketTree->id, CopyTicketTree->date, CopyTicketTree->time, CopyTicketTree->resIVA);
+    // Imprimir los metadatos del ticket
+    printf("Ticket #%d\n", CopyTicketTree->id);
+    printf("Fecha: %s\n", CopyTicketTree->date);
+    printf("Hora: %s\n", CopyTicketTree->time);
+    printf("Responsabilidad IVA: %s\n", CopyTicketTree->resIVA);
+    printf("A CONSUMIDOR FINAL\n\n");
+
+    // Imprimir el Header de los items del ticket
+    PrintItemTable("Producto", column_width_product);
+    PrintItemTable("Cantidad", column_width_quantity);
+    PrintItemTable("Precio", column_width_price);
+    PrintItemTable("Subtotal", column_width_subtotal);
+    printf("\n");
+    // Subline header
+    PrintItemTable("--------", column_width_product);
+    PrintItemTable("--------", column_width_quantity);
+    PrintItemTable("------", column_width_price);
+    PrintItemTable("--------", column_width_subtotal);
+    printf("\n\n");
+
     PrintItemTicket(CopyTicketTree->ProductsTicket);
     PrintTicketTreePre(CopyTicketTree->left);
     PrintTicketTreePre(CopyTicketTree->right);

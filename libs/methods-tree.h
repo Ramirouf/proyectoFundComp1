@@ -21,7 +21,6 @@ void InsertTicket()
   while (seguir)
   {
     seguir = InsertItemTicket();
-    printf("SEGUIR: %d\n", seguir);
     if (seguir)
       cant_prod_min++;
   }
@@ -137,6 +136,8 @@ void PrintItemTicket(struct ItemTicket *pItemTicket)
   char price[10];
   while (pItemTicket != NULL)
   {
+    printf("\nAAAAAAAAA DIRECC:%p\n DESESPERACIONNNNN!!!!!", pItemTicket);
+    printf("Muestro next: %p", *pItemTicket->next);
     PrintItemTable(pItemTicket->itemInfo->name, column_width_product);
     PrintItemTable("", column_width_subtotal);
     printf("\n");

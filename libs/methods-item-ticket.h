@@ -3,13 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Item *GetProductById(int id)
-{
+struct Item *GetProductById(int id){
   struct ListProducts *product = pListProducts;
-  while (product != NULL)
-  {
-    if (product->itemInfo.idItem == id)
-    {
+  while (product != NULL){
+    if (product->itemInfo.idItem == id){
       return &product->itemInfo;
     }
     product = product->next;
@@ -18,8 +15,7 @@ struct Item *GetProductById(int id)
   return NULL;
 }
 
-int InsertItemTicket()
-{
+int InsertItemTicket(){
   int option;
   struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
 
@@ -27,8 +23,7 @@ int InsertItemTicket()
   printf("\nIngrese el codigo del producto: ");
   scanf("%d", &option);
 
-  if (option >= 1 && option <= 10)
-  {
+  if (option >= 1 && option <= 10){
     // Info del nuevo item
     pNewItemTicket->itemInfo = GetProductById(option);
     // Pedir la cantidad de productos
@@ -37,25 +32,20 @@ int InsertItemTicket()
     printf("\n");
 
     // Enlazar la nueva lista con la anterior
-    if (pAuxItemTicket == NULL)
-    {
+    if (pAuxItemTicket == NULL){
       pAuxItemTicket = pNewItemTicket;
       pNewItemTicket->next = NULL;
-    }
-    else
-    {
+      printf("pAuxItemTicket Null\n");
+    } else{
+      printf("pAuxItemTicket Things\n");
       pNewItemTicket->next = pAuxItemTicket;
       pAuxItemTicket = pNewItemTicket;
     }
     return 1;
-  }
-  else if (option == -1)
-  {
+  } else if (option == -1){
     printf("\nDeteniendo carga de tickets\n");
     return 0;
-  }
-  else
-  {
+  } else{
     PrintMessage("Debe de haber al menos un producto para generar un ticket", "Error");
     return 1;
   }

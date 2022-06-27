@@ -78,29 +78,6 @@ void SetConfigTicket()
 	char *mode = "w";
 
 	struct ConfigTicket config;
-}
-
-void PrintConfigTicket()
-{
-	struct ConfigTicket *configT = GetConfigTicket();
-
-	// Print the text from the file.
-	printf("INFORMACION DEL TICKET\n\n");
-	printf("Nombre de la empresa: %s", configT->businessName);
-	printf("Direccion: %s", configT->address);
-	printf("Telefono: %s", configT->phone);
-	printf("Codigo Postal: %s", configT->postalCode);
-	printf("CUIT: %s", configT->cuit);
-	printf("Mensaje de Gracias: %s", configT->messageGB);
-	printf("\n");
-}
-
-void SetConfigTicket()
-{
-	char *filename = "./public/ticket_config.txt";
-	char *mode = "w";
-
-	struct ConfigTicket config;
 
 	FILE *fptr;
 	fptr = fopen(filename, mode);
@@ -199,11 +176,9 @@ case 4:
 default:
 	printf("Opcion no valida\n");
 }
-}
 while (option != 4)
 	;
 }
-
 void GenerateTicket()
 {
 	// Ticket data

@@ -253,38 +253,6 @@ void MenuSystem(){
 	} while (option != 8);
 }
 
-
-void PrintListProductTicket(){
-	int PRODUCT_COLUMN_WIDTH = 30 + 1;
-	int QUANTITY_COLUMN_WIDTH = 10 + 1;
-	int PRICE_COLUMN_WIDTH = 10;
-	int TOTAL_COLUMN_WIDTH = PRICE_COLUMN_WIDTH + QUANTITY_COLUMN_WIDTH + PRODUCT_COLUMN_WIDTH;
-
-	struct ListProducts *pAuxListProducts = pListProducts;
-
-
-	// Header
-	PrintManyTimes("*", TOTAL_COLUMN_WIDTH);
-
-	printf("\n");
-
-	PrintItemTable("Producto", PRODUCT_COLUMN_WIDTH);
-	PrintItemTable("Cantidad", QUANTITY_COLUMN_WIDTH);
-	PrintItemTable("Precio U.", PRICE_COLUMN_WIDTH);
-
-	// Productos
-	while (pAuxListProducts != NULL){
-		printf("\n");
-		PrintItemTable(pAuxListProducts->itemInfo.name, PRODUCT_COLUMN_WIDTH);
-		PrintItemTable(DoubleToString(pAuxListProducts->itemInfo.price), QUANTITY_COLUMN_WIDTH);
-		PrintItemTable(DoubleToString(pAuxListProducts->itemInfo.price), QUANTITY_COLUMN_WIDTH);
-		pAuxListProducts = pAuxListProducts->next;
-	}
-
-
-	printf("\n");
-}
-
 int main(){
 
 	SetListProducts(); // Inicializar la lista de productos global

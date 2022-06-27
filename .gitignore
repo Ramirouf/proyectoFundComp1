@@ -1,1 +1,5 @@
+Debug
 .vscode
+
+# Ignorar archivos terminados en .exe y archivos sin extension
+**/*.exe

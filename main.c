@@ -13,6 +13,7 @@
 #include <conio.h>
 // Testing
 
+<<<<<<< HEAD
 <<<<<< < HEAD
 	struct ConfigTicket *GetConfigTicket(){
 	struct ConfigTicket *config = malloc(sizeof(struct ConfigTicket));
@@ -68,6 +69,73 @@
 		// char *mode = "r";
 		// // Ticket data
 		// struct ConfigTicket *configT = GetConfigTicket(mode);
+=======
+struct ConfigTicket *GetConfigTicket()
+{
+	struct ConfigTicket *config = malloc(sizeof(struct ConfigTicket));
+	FILE *fptr;
+	char *filename = "./public/ticket_config.txt";
+	char *mode = "r";
+	char *line = NULL;
+	size_t len = 0;
+	size_t read;
+
+	fptr = fopen(filename, mode);
+	if (fptr == NULL)
+		exit(EXIT_FAILURE);
+
+	// while ((read = getline(&line, &len, fptr)) != -1){
+	// 	printf("%s", line);
+	// }
+
+	read = getline(&line, &len, fptr);
+	sprintf(config->businessName, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->address, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->phone, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->postalCode, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->cuit, "%s", line);
+	read = getline(&line, &len, fptr);
+	sprintf(config->messageGB, "%s", line);
+
+	free(line);
+	fclose(fptr);
+
+	return config;
+}
+
+void PreviewTicket()
+{
+	// char *mode = "r";
+	// // Ticket data
+	// struct ConfigTicket *configT = GetConfigTicket(mode);
+}
+
+void PrintConfigTicket()
+{
+	struct ConfigTicket *configT = GetConfigTicket();
+
+	// Print the text from the file.
+	printf("INFORMACION DEL TICKET\n\n");
+	printf("Nombre de la empresa: %s", configT->businessName);
+	printf("Direccion: %s", configT->address);
+	printf("Telefono: %s", configT->phone);
+	printf("Codigo Postal: %s", configT->postalCode);
+	printf("CUIT: %s", configT->cuit);
+	printf("Mensaje de Gracias: %s", configT->messageGB);
+	printf("\n");
+}
+
+void SetConfigTicket()
+{
+	char *filename = "./public/ticket_config.txt";
+	char *mode = "w";
+
+	struct ConfigTicket config;
+>>>>>>> hotfix2
 
 	}
 
@@ -132,6 +200,7 @@
 		fclose(fptr);
 	}
 
+<<<<<<< HEAD
 	void TicketSettings(){
 		int option;
 
@@ -191,6 +260,82 @@
 					printf("Opcion no valida\n");
 			}
 		} while (option != 4);
+=======
+		switch (option)
+		{
+		case 1:
+			if (setTicket)
+			{
+				printf("\n");
+				PrintConfigTicket();
+				printf("\n\n");
+			}
+			else
+			{
+				PrintMessage("Todavia no se establecio la configuracion del ticket", "Atencion");
+			}
+			break;
+		case 2:
+			if (setTicket)
+			{
+				char selection;
+				PrintMessage("Ya se establecio la configuracion del ticket, desea reestablecerla? (s/n)", "Atencion");
+				scanf("%c", &selection);
+				if (selection == 's')
+				{
+					SetConfigTicket();
+				}
+				else
+				{
+					PrintMessage("No hubo cambios", "Info");
+				}
+			}
+			else
+			{
+				printf("\n");
+				SetConfigTicket();
+				printf("\n\n");
+			}
+			// Ya se configuro el ticket
+			setTicket = 1;
+			break;
+		case 3:
+			if (setTicket)
+			{
+				printf("\n");
+				PreviewTicket();
+				printf("\n\n");
+			}
+			else
+			{
+				PrintMessage("Todavia no se establecio la configuracion del ticket", "Atencion");
+			}
+			break;
+		case 4:
+			// Vuelve al menu principal
+			break;
+		default:
+			printf("Opcion no valida\n");
+		}
+	} while (option != 4);
+}
+
+void GenerateTicket()
+{
+	// Ticket data
+	printf("GENERANDO UN NUEVO TICKET\n\n");
+	InsertTicket();
+	printf("TICKET GENERADO\n");
+}
+
+void ViewAllTickets()
+{
+	// Si no hay tickets, no se muestra nada
+	if (pTicketTree == NULL)
+	{
+		PrintMessage("No hay tickets aun", "Info");
+		return;
+>>>>>>> hotfix2
 	}
 
 	void GenerateTicket(){

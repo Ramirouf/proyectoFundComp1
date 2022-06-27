@@ -138,7 +138,7 @@ void PrintItemTicket(struct ItemTicket *pItemTicket)
     PrintItemTable(pItemTicket->itemInfo->name, column_width_product);
     PrintItemTable(DoubleToString(pItemTicket->quantity), column_width_quantity);
     PrintItemTable(DoubleToString(pItemTicket->itemInfo->price), column_width_price);
-    PrintItemTable(DoubleToString(pItemTicket->itemInfo->price), column_width_subtotal);
+    PrintItemTable(DoubleToString(pItemTicket->itemInfo->price * pItemTicket->quantity), column_width_subtotal);
     printf("\n");
     pItemTicket = pItemTicket->next;
     if (!pItemTicket)

@@ -19,7 +19,6 @@ void InsertTicket(){
   // Items del ticket
   while (seguir){
     seguir = InsertItemTicket();
-    printf("SEGUIR: %d\n", seguir);
     if (seguir)
       cant_prod_min++;
   }

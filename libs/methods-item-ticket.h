@@ -17,13 +17,13 @@ struct Item *GetProductById(int id){
 
 int InsertItemTicket(){
   int option;
-  struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
 
   PrintListProducts();
   printf("\nIngrese el codigo del producto: ");
   scanf("%d", &option);
 
   if (option >= 1 && option <= 10){
+    struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
     // Info del nuevo item
     pNewItemTicket->itemInfo = GetProductById(option);
     // Pedir la cantidad de productos

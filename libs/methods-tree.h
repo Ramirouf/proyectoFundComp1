@@ -137,8 +137,9 @@ void PrintItemTicket(struct ItemTicket *pItemTicket)
   while (pItemTicket != NULL)
   {
     PrintItemTable(pItemTicket->itemInfo->name, column_width_product);
-    PrintItemTable(DoubleToString(pItemTicket->quantity), column_width_quantity);
-    PrintItemTable(DoubleToString(pItemTicket->itemInfo->price), column_width_price);
+    // PrintItemTable(DoubleToString(pItemTicket->quantity), column_width_quantity);
+    printf("\n%.2f x %.2f", pItemTicket->quantity, pItemTicket->itemInfo->price);
+    // PrintItemTable(DoubleToString(pItemTicket->itemInfo->price), column_width_price);
     PrintItemTable(DoubleToString(pItemTicket->itemInfo->price * pItemTicket->quantity), column_width_subtotal);
     printf("\n");
     pItemTicket = pItemTicket->next;
@@ -165,9 +166,9 @@ void PrintTicketTreePre(struct Ticket *CopyTicketTree)
     printf("A CONSUMIDOR FINAL\n\n");
 
     // Imprimir el Header de los items del ticket
-    PrintItemTable("Producto", column_width_product);
-    PrintItemTable("Cantidad", column_width_quantity);
-    PrintItemTable("Precio", column_width_price);
+    PrintItemTable("Productos", column_width_product);
+    // PrintItemTable("Cantidad", column_width_quantity);
+    // PrintItemTable("Precio", column_width_price);
     PrintItemTable("Subtotal", column_width_subtotal);
     printf("\n");
     // Subline header

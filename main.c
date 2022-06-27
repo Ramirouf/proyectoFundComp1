@@ -231,7 +231,11 @@ void ViewTicket()
 		PrintTicket(ticket_search);
 	}
 }
-
+void Exit()
+{
+	printf("Saliendo del programa...");
+	exit(0);
+}
 void MenuSystem()
 {
 	int option;
@@ -246,9 +250,9 @@ void MenuSystem()
 		printf("\n");
 
 		MenuTitle("MENU SYSTEM");
-		printf("4) Configuracion de cuenta (??????)\n");
+		printf("4) Configuracion de cuenta (?)\n");
 		printf("5) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
-		printf("6) Cerrar sesion (??????)\n");
+		printf("6) Cerrar sesion (?)\n");
 		printf("7) Salir\n");
 
 		printf("\n");
@@ -289,7 +293,7 @@ void MenuSystem()
 			break;
 		case 7:
 			printf("\n\n");
-			// Exit ();
+			Exit();
 			printf("\n\n");
 			break;
 		default:

@@ -19,7 +19,7 @@ char *IVAResponsability(){
     scanf("%d", &option);
 
     if (option < 1 || option > 5){
-      PrintMessageError("Opcion invalida", "Error");
+      PrintMessage("Opcion invalida", "Error");
     }
   } while (option < 1 || option > 5);
 

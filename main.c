@@ -253,44 +253,6 @@ void MenuSystem(){
 	} while (option != 8);
 }
 
-void PrintManyTimes(char *string, int times){
-	int i;
-	for (i = 0; i < times; i++){
-		printf("%s", string);
-	}
-}
-
-void PrintItemTable(char *nameProduct, int widthColumn){
-	int TEXT_WIDTH = widthColumn - 1; // -1 para el espacio entre el limite del nombre y el final de la columna
-
-	/*
-		Ejemplos
-
-		Hola, buenas cómo... | // Esto pasa si la longitud del string es mayor a TEXT_WIDTH
-		Hola, buenas!        | // Esto pasa si la longitud del string es manor a TEXT_WITDH
-		Hola, buenas buenas! | // Esto pasa si la longitud del string es igual a TEXT_WIDTH
-	*/
-
-	int lengthText = strlen(nameProduct);
-	for (int i = 0; i < widthColumn; i++){
-		if ((lengthText > TEXT_WIDTH) && (i >= (TEXT_WIDTH - 3))){
-			if (i == TEXT_WIDTH) printf(" ");
-			else printf(".");
-		} else{
-			if (i < lengthText){
-				printf("%c", nameProduct[i]);
-			} else{
-				printf(" ");
-			}
-		}
-	}
-}
-
-char *DoubleToString(double number){
-	char *string = malloc(sizeof(char) * 10);
-	sprintf(string, "%.2lf", number);
-	return string;
-}
 
 void PrintListProductTicket(){
 	int PRODUCT_COLUMN_WIDTH = 30 + 1;

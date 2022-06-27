@@ -13,8 +13,7 @@
 #include <conio.h>
 // Testing
 
-struct ConfigTicket GetConfigTicket(char *mode)
-{
+struct ConfigTicket GetConfigTicket(char *mode){
 	// File mode - https://www.tutorialesprogramacionya.com/cya/detalleconcepto.php?punto=80&codigo=80&inicio=75
 	struct ConfigTicket config;
 	FILE *fptr; // File pointer
@@ -23,8 +22,7 @@ struct ConfigTicket GetConfigTicket(char *mode)
 	fptr = fopen(filename, mode); // Open the file
 
 	// Program exits if the file pointer returns NULL.
-	if (fptr == NULL)
-	{
+	if (fptr == NULL){
 		printf("Error! opening file");
 		exit(1);
 	}
@@ -36,8 +34,7 @@ struct ConfigTicket GetConfigTicket(char *mode)
 	return config;
 }
 
-void PreviewTicket()
-{
+void PreviewTicket(){
 	// Ticket data
 	struct ConfigTicket configT;
 	char *mode = "r";
@@ -59,8 +56,7 @@ void PreviewTicket()
 	SeparateLine(WIDTH_TICKET);
 }
 
-void PrintConfigTicket()
-{
+void PrintConfigTicket(){
 	char *mode = "at";
 	struct ConfigTicket config;
 	config = GetConfigTicket(mode);
@@ -75,8 +71,7 @@ void PrintConfigTicket()
 	printf("- Leyenda: %s\n", config.messageGB);
 }
 
-void SetConfigTicket()
-{
+void SetConfigTicket(){
 	struct ConfigTicket config;
 
 	FILE *fptr;
@@ -111,12 +106,10 @@ void SetConfigTicket()
 	fclose(fptr);
 }
 
-void TicketSettings()
-{
+void TicketSettings(){
 	int option;
 
-	do
-	{
+	do{
 		MenuTitle("CONFIGURACION DE TICKET");
 		printf("1) Ver informacion\n");
 		printf("2) Cambiar informacion\n");
@@ -128,46 +121,41 @@ void TicketSettings()
 		printf("Ingrese una opcion: ");
 		scanf("%d", &option);
 
-		switch (option)
-		{
-		case 1:
-			printf("\n");
-			PrintConfigTicket();
-			printf("\n\n");
-			break;
-		case 2:
-			printf("\n");
-			SetConfigTicket();
-			printf("\n\n");
-			break;
-		case 3:
-			printf("\n");
-			PreviewTicket();
-			printf("\n\n");
-			break;
-		case 4:
-			// Vuelve al menu principal
-			break;
-		default:
-			printf("Opcion no valida\n");
+		switch (option){
+			case 1:
+				printf("\n");
+				PrintConfigTicket();
+				printf("\n\n");
+				break;
+			case 2:
+				printf("\n");
+				SetConfigTicket();
+				printf("\n\n");
+				break;
+			case 3:
+				printf("\n");
+				PreviewTicket();
+				printf("\n\n");
+				break;
+			case 4:
+				// Vuelve al menu principal
+				break;
+			default:
+				printf("Opcion no valida\n");
 		}
 	} while (option != 4);
 }
 
-void GenerateTicket()
-{
+void GenerateTicket(){
 	// Ticket data
 	printf("GENERANDO UN NUEVO TICKET\n\n");
-	printf("Ingrese codigo de producto -1 para terminar\n");
 	InsertTicket();
 	printf("TICKET GENERADO\n");
 }
 
-void ViewAllTickets()
-{
+void ViewAllTickets(){
 	// Si no hay tickets, no se muestra nada
-	if (pTicketTree == NULL)
-	{
+	if (pTicketTree == NULL){
 		PrintMessage("No hay tickets aun", "Info");
 		return;
 	}
@@ -178,26 +166,21 @@ void ViewAllTickets()
 }
 
 // La funcion SearchTicketTree busca un ticket en el arbol de tickets
-struct Ticket *SearchTicketTree(struct Ticket *pTicketAux, int id)
-{
+struct Ticket *SearchTicketTree(struct Ticket *pTicketAux, int id){
 	// Si el arbol esta vacio, no hay ningun ticket
-	if (pTicketAux == NULL)
-	{
+	if (pTicketAux == NULL){
 		return NULL;
 	}
 	// Si el id del ticket es igual al id del ticket que se busca, se retorna el ticket
-	if (pTicketAux->id == id)
-	{
+	if (pTicketAux->id == id){
 		return pTicketAux;
 	}
 	// Si el id del ticket es menor al id del ticket que se busca, se busca en el subarbol izquierdo
-	if (pTicketAux->id > id)
-	{
+	if (pTicketAux->id > id){
 		return SearchTicketTree(pTicketAux->left, id);
 	}
 	// Si el id del ticket es mayor al id del ticket que se busca, se busca en el subarbol derecho
-	if (pTicketAux->id < id)
-	{
+	if (pTicketAux->id < id){
 		return SearchTicketTree(pTicketAux->right, id);
 	}
 	// Si no se encuentra el ticket, se retorna NULL
@@ -206,39 +189,32 @@ struct Ticket *SearchTicketTree(struct Ticket *pTicketAux, int id)
 
 // La funcion SearchTicket busca un ticket en la lista de tickets
 // y lo retorna.
-struct Ticket *SearchTicket(int id)
-{
+struct Ticket *SearchTicket(int id){
 	struct Ticket *pTicket = NULL;
 	struct Ticket *pTicketAux = pTicketTree;
 	pTicket = SearchTicketTree(pTicketAux, id);
 	return pTicket;
 }
 
-void ViewTicket()
-{
+void ViewTicket(){
 	int id_ticket_search;
 	printf("Ingrese el ID del Ticket: ");
 	scanf("%d", &id_ticket_search);
 
 	struct Ticket *ticket_search = SearchTicket(id_ticket_search);
 
-	if (ticket_search == NULL)
-	{
+	if (ticket_search == NULL){
 		PrintMessage("Ticket no encontrado", "Error");
-	}
-	else
-	{
+	} else{
 		printf("Ticket encontrado\n");
 		PrintTicket(ticket_search);
 	}
 }
 
-void MenuSystem()
-{
+void MenuSystem(){
 	int option;
 
-	do
-	{
+	do{
 		MenuTitle("MENU PRINCIPAL");
 		printf("1) Generar un Ticket\n");
 		printf("2) Ver un Ticket\n");
@@ -257,50 +233,48 @@ void MenuSystem()
 		printf("Ingrese una opcion: ");
 		scanf("%d", &option);
 
-		switch (option)
-		{
-		case 1:
-			printf("\n");
-			GenerateTicket();
-			printf("\n");
-			break;
-		case 2:
-			printf("\n\n");
-			ViewTicket();
-			break;
-		case 3:
-			printf("\n");
-			ViewAllTickets();
-			printf("\n");
-			break;
-		case 4:
-			printf("\n\n");
-			// AccountSettings ();
-			printf("\n\n");
-			break;
-		case 5:
-			printf("\n\n");
-			TicketSettings();
-			printf("\n\n");
-			break;
-		case 6:
-			printf("\n\n");
-			// Logout ();
-			printf("\n\n");
-			break;
-		case 7:
-			printf("\n\n");
-			// Exit ();
-			printf("\n\n");
-			break;
-		default:
-			PrintMessage("Opcion invalida", "Error");
+		switch (option){
+			case 1:
+				printf("\n");
+				GenerateTicket();
+				printf("\n");
+				break;
+			case 2:
+				printf("\n\n");
+				ViewTicket();
+				break;
+			case 3:
+				printf("\n");
+				ViewAllTickets();
+				printf("\n");
+				break;
+			case 4:
+				printf("\n\n");
+				// AccountSettings ();
+				printf("\n\n");
+				break;
+			case 5:
+				printf("\n\n");
+				TicketSettings();
+				printf("\n\n");
+				break;
+			case 6:
+				printf("\n\n");
+				// Logout ();
+				printf("\n\n");
+				break;
+			case 7:
+				printf("\n\n");
+				// Exit ();
+				printf("\n\n");
+				break;
+			default:
+				PrintMessage("Opcion invalida", "Error");
 		}
 	} while (option != 8);
 }
 
-int main()
-{
+int main(){
 
 	SetListProducts(); // Inicializar la lista de productos global
 	MenuSystem();

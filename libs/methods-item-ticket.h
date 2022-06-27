@@ -19,7 +19,7 @@ int InsertItemTicket(){
   int option;
 
   PrintListProducts();
-  printf("\nIngrese el codigo del producto: ");
+  printf("\nIngrese el codigo del producto (o -1 para terminar): ");
   scanf("%d", &option);
 
   if (option >= 1 && option <= 10){

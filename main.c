@@ -189,14 +189,14 @@ void TicketSettings(){
 		}
 	} while (option != 4);
 }
-
+/*
 void GenerateTicket(){
 	// Ticket data
 	printf("GENERANDO UN NUEVO TICKET\n\n");
 	InsertTicket();
 	printf("TICKET GENERADO\n");
 }
-
+*/
 void ViewAllTickets(){
 	// Si no hay tickets, no se muestra nada
 	if (pTicketTree == NULL){

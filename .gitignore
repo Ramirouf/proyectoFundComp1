@@ -1,5 +1,6 @@
 Debug
 .vscode
-
+# Eliminar ticket config
+public/ticket_config.txt
 # Ignorar archivos terminados en .exe y archivos sin extension
 **/*.exe

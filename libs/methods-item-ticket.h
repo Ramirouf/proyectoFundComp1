@@ -47,36 +47,6 @@ int InsertItemTicket()
       pNewItemTicket->next = pAuxItemTicket;
       pAuxItemTicket = pNewItemTicket;
     }
-<<<<<<< HEAD
-  } else{
-    PrintMessage("Id incorrecto, vuelva a intentarlo", "Error");
-  }
-}
-
-// struct Item getOneProduct(int *cant_prod_min){
-//   struct Item *pNewItemProduct = (struct Item *)malloc(sizeof(struct Item));
-
-//   int option;
-
-//   do{
-//     ListOfItems(); // Imprime la lista de productos
-
-//     printf("Ingrese una opcion: ");
-//     scanf("%d", &option);
-
-//     if (option >= 1 && option <= 10){
-//       pNewItemProduct = products[option - 1]; // producs va del 0 al 9
-//       *cant_prod_min = *cant_prod_min + 1;
-//     } else{
-//       PrintMessage("Debe de haber al menos un producto para generar un ticket", "Error");
-//     }
-
-//   } while (cant_prod_min < 1);
-
-//   return *pNewItemProduct;
-// }
-
-=======
     return 1;
   }
   else if (option == -1)
@@ -90,4 +60,3 @@ int InsertItemTicket()
     return 1;
   }
 }
->>>>>>> fcb7d26107b2e4f1f1e5e8617f88445332b90d1d

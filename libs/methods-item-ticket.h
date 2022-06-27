@@ -40,7 +40,7 @@ void InsertItemTicket(){
       pAuxItemTicket = pNewItemTicket;
     }
   } else{
-    PrintMessageError("Debe de haber al menos un producto para generar un ticket", "Error");
+    PrintMessage("Id incorrecto, vuelva a intentarlo", "Error");
   }
 }
 
@@ -59,7 +59,7 @@ void InsertItemTicket(){
 //       pNewItemProduct = products[option - 1]; // producs va del 0 al 9
 //       *cant_prod_min = *cant_prod_min + 1;
 //     } else{
-//       PrintMessageError("Debe de haber al menos un producto para generar un ticket", "Error");
+//       PrintMessage("Debe de haber al menos un producto para generar un ticket", "Error");
 //     }
 
 //   } while (cant_prod_min < 1);

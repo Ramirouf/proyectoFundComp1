@@ -2,12 +2,43 @@
 #include <stdlib.h>
 #include <string.h>
 
+// La funcion IntToString que convierte un entero a un string y lo devuelve
+char *IntToString(int number){
+  char *string = malloc(sizeof(char) * 10);
+  sprintf(string, "%d", number);
+  return string;
+}
+
+// La funcion FloatToString que convierte un float a un string y lo devuelve
+char *FloatToString(float number){
+  char *string = malloc(sizeof(char) * 10);
+  sprintf(string, "%.2f", number);
+  return string;
+}  
 
 void PrintListProducts(){
-  printf("LISTA DE PRODUCTOS\n");
+  printf("Selecciona un producto: \n\n");
   struct ListProducts *product = pListProducts;
+  int column_width_id = 5;
+  int column_width_name = 15;
+  int column_width_price = 10;
+
+  // Header de la lista de productos
+  PrintItemTable("ID", column_width_id);
+  PrintItemTable("Nombre", column_width_name);
+  PrintItemTable("Precio U.", column_width_price);
+  printf("\n");
+  // Separador de la lista de productos
+  PrintItemTable("----", column_width_id);
+  PrintItemTable("--------------", column_width_name);
+  PrintItemTable("---------", column_width_price);
+  printf("\n");
+
   while (product != NULL){
-    printf("%d. %s $%.2lf\n", product->itemInfo.idItem, product->itemInfo.name, product->itemInfo.price);
+    PrintItemTable(IntToString(product->itemInfo.idItem), column_width_id);
+    PrintItemTable(product->itemInfo.name, column_width_name);
+    PrintItemTable(FloatToString(product->itemInfo.price), column_width_price);
+    printf("\n");
     product = product->next;
   }
   printf("\n");

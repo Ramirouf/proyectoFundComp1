@@ -118,31 +118,40 @@ void PrintItemTicket(struct ItemTicket *pItemTicket){
   printf("\n\n");
 }
 
-void PrintTicketTreePre(struct Ticket *CopyTicketTree){
+void PrintTicket(struct Ticket *pTicket){
   int column_width_product = 30;
   int column_width_quantity = 10;
   int column_width_price = 10;
   int column_width_subtotal = 10;
+
+  // Imprimir los metadatos del ticket
+  printf("Ticket #%d\n", pTicket->id);
+  printf("Fecha: %s\n", pTicket->date);
+  printf("Hora: %s\n", pTicket->time);
+  printf("Responsabilidad IVA: %s\n", pTicket->resIVA);
+  printf("A CONSUMIDOR FINAL\n\n");
+
+  // Imprimir el Header de los items del ticket
+  PrintItemTable("Producto", column_width_product);
+  PrintItemTable("Cantidad", column_width_quantity);
+  PrintItemTable("Precio", column_width_price);
+  PrintItemTable("Subtotal", column_width_subtotal); printf("\n");
+  // Subline header    
+  PrintItemTable("--------", column_width_product);
+  PrintItemTable("--------", column_width_quantity);
+  PrintItemTable("------", column_width_price);
+  PrintItemTable("--------", column_width_subtotal); printf("\n\n");
+
+  // Imprimir los items del ticket
+  PrintItemTicket(pTicket->ProductsTicket);
+}
+
+void PrintTicketTreePre(struct Ticket *CopyTicketTree){
   if (CopyTicketTree != NULL){
-    // Imprimir los metadatos del ticket
-    printf("Ticket #%d\n", CopyTicketTree->id);
-    printf("Fecha: %s\n", CopyTicketTree->date);
-    printf("Hora: %s\n", CopyTicketTree->time);
-    printf("Responsabilidad IVA: %s\n", CopyTicketTree->resIVA);
-    printf("A CONSUMIDOR FINAL\n\n");
+    // Imprimir Ticket
+    PrintTicket(CopyTicketTree);
 
-    // Imprimir el Header de los items del ticket
-    PrintItemTable("Producto", column_width_product);
-    PrintItemTable("Cantidad", column_width_quantity);
-    PrintItemTable("Precio", column_width_price);
-    PrintItemTable("Subtotal", column_width_subtotal); printf("\n");
-    // Subline header    
-    PrintItemTable("--------", column_width_product);
-    PrintItemTable("--------", column_width_quantity);
-    PrintItemTable("------", column_width_price);
-    PrintItemTable("--------", column_width_subtotal); printf("\n\n");
-
-    PrintItemTicket(CopyTicketTree->ProductsTicket);
+    // Bajar por el arbol hasta el ultimo nodo
     PrintTicketTreePre(CopyTicketTree->left);
     PrintTicketTreePre(CopyTicketTree->right);
   }

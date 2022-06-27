@@ -154,34 +154,72 @@ void TicketSettings(){
 }
 
 void GenerateTicket(){
-	// Pasos para generar un ticket
-	// 1. Elegir un item del menu (se muestra el nombre y el precio)
-	// 2. Elegir la cantidad de items
-	// 3. Agregar el item a la lista de items
-	/*
-		4. Una vez que se termina de agregar todos los items, se muestra todos los items, se muestra el total,
-		se puede modificar y/o eliminar items, se puede agregar nuevos items.
-	*/
-	// 5. Se guarda la lista de items en un archivo
-	// 6. Se imprime el ticket
-
-	// Implementacion
-	// 1. Elegir un item del menu (se muestra el nombre y el precio)
-
-
-	//TESTING
-	printf("AGREGANDO TICKET...\n");
+	// Ticket data
+	printf("GENERANDO UN NUEVO TICKET\n\n");
 	InsertTicket();
-	printf("TICKET AGREGADO\n");
-	// TESTING
+	printf("TICKET GENERADO\n");
 }
 
 void ViewAllTickets(){
-	// Imprimir direccion de memoria de todos los tickets
+	// Si no hay tickets, no se muestra nada
+	if (pTicketTree == NULL){
+		PrintMessage("No hay tickets aun", "Info");
+		return;
+	}
+
 	printf("TODOS LOS TICKETS\n");
 	PrintTicketTreePre(pTicketTree);
-	printf("\nFin.\n");
+	printf("\nFIN.\n");
 }
+
+// La funcion SearchTicketTree busca un ticket en el arbol de tickets
+struct Ticket *SearchTicketTree(struct Ticket *pTicketAux, int id){
+	// Si el arbol esta vacio, no hay ningun ticket
+	if (pTicketAux == NULL){
+		return NULL;
+	}
+	// Si el id del ticket es igual al id del ticket que se busca, se retorna el ticket
+	if (pTicketAux->id == id){
+		return pTicketAux;
+	}
+	// Si el id del ticket es menor al id del ticket que se busca, se busca en el subarbol izquierdo
+	if (pTicketAux->id > id){
+		return SearchTicketTree(pTicketAux->left, id);
+	}
+	// Si el id del ticket es mayor al id del ticket que se busca, se busca en el subarbol derecho
+	if (pTicketAux->id < id){
+		return SearchTicketTree(pTicketAux->right, id);
+	}
+	// Si no se encuentra el ticket, se retorna NULL
+	return NULL;
+}
+
+// La funcion SearchTicket busca un ticket en la lista de tickets
+// y lo retorna.
+struct Ticket *SearchTicket(int id){
+	struct Ticket *pTicket = NULL;
+	struct Ticket *pTicketAux = pTicketTree;
+	pTicket = SearchTicketTree(pTicketAux, id);
+	return pTicket;
+}
+
+void ViewTicket(){
+	int id_ticket_search;
+	printf("Ingrese el ID del Ticket: ");
+	scanf("%d", &id_ticket_search);
+
+	struct Ticket *ticket_search = SearchTicket(id_ticket_search);
+
+	if (ticket_search == NULL){
+		PrintMessage("Ticket no encontrado", "Error");
+	} else{
+		printf("Ticket encontrado\n");
+		PrintTicket(ticket_search);
+	}
+}
+
+
+
 
 void MenuSystem(){
 	int option;
@@ -189,17 +227,16 @@ void MenuSystem(){
 	do{
 		MenuTitle("MENU PRINCIPAL");
 		printf("1) Generar un Ticket\n");
-		printf("2) Validar un Ticket (dont work)\n");
-		printf("3) Ver un Ticket (dont work)\n");
-		printf("4) Ver todos los Tickets\n");
+		printf("2) Ver un Ticket\n");
+		printf("3) Ver todos los Tickets\n");
 
 		printf("\n");
 
 		MenuTitle("MENU SYSTEM");
-		printf("5) Configuracion de cuenta\n");
-		printf("6) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
-		printf("7) Cerrar sesion (dont work)\n");
-		printf("8) Salir\n");
+		printf("4) Configuracion de cuenta (??????)\n");
+		printf("5) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
+		printf("6) Cerrar sesion (??????)\n");
+		printf("7) Salir\n");
 
 		printf("\n");
 
@@ -208,47 +245,41 @@ void MenuSystem(){
 
 		switch (option){
 			case 1:
-				printf("\n\n");
+				printf("\n");
 				GenerateTicket();
-				printf("\n\n");
+				printf("\n");
 				break;
 			case 2:
 				printf("\n\n");
-				// ValidateTicket ();
-				printf("\n\n");
+				ViewTicket();
 				break;
 			case 3:
-				printf("\n\n");
-				// ViewTicket ();
-				printf("\n\n");
+				printf("\n");
+				ViewAllTickets();
+				printf("\n");
 				break;
 			case 4:
-				printf("\n\n");
-				ViewAllTickets();
-				printf("\n\n");
-				break;
-			case 5:
 				printf("\n\n");
 				// AccountSettings ();
 				printf("\n\n");
 				break;
-			case 6:
+			case 5:
 				printf("\n\n");
 				TicketSettings();
 				printf("\n\n");
 				break;
-			case 7:
+			case 6:
 				printf("\n\n");
 				// Logout ();
 				printf("\n\n");
 				break;
-			case 8:
+			case 7:
 				printf("\n\n");
 				// Exit ();
 				printf("\n\n");
 				break;
 			default:
-				PrintMessageError("Opcion invalida", "Error");
+				PrintMessage("Opcion invalida", "Error");
 		}
 	} while (option != 8);
 }

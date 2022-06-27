@@ -13,7 +13,7 @@ void SeparateLine(int cant){
   printf("\n");
 }
 
-void PrintMessageError(char *message, char *type){
+void PrintMessage(char *message, char *type){
   printf("\n");
   SeparateLine(0);
   printf("%s: %s\n", type, message);

@@ -112,22 +112,6 @@ void PrintItemTable(char *nameProduct, int widthColumn)
   }
 }
 
-char *DoubleToString(double number)
-{
-  char *string = malloc(sizeof(char) * 10);
-  sprintf(string, "%.2lf", number);
-  return string;
-}
-
-void PrintManyTimes(char *string, int times)
-{
-  int i;
-  for (i = 0; i < times; i++)
-  {
-    printf("%s", string);
-  }
-}
-
 void PrintItemTicket(struct ItemTicket *pItemTicket)
 {
   int column_width_product = 40;

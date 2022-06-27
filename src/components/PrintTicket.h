@@ -76,7 +76,6 @@ void printTicket(Ticket *ticket)
     // For that, we need to range over the products
     // We create a new ticket, to not change the original one
     Ticket *ticketSearch = ticket;
-    // POR QUE NO APARECE PRINTTICKETTEST.C ??????
     do
     {
         printf("Codigo producto: %d\n", ticketSearch->ProductsTicket->itemInfo.idItem);

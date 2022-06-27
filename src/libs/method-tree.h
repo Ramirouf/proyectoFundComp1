@@ -179,9 +179,9 @@ struct Ticket *newTicket(){
   //Ticket Data
   // id
   pNewTicket->id = id_tickets;
-  // Fecha y Hora
-  // sprintf(pNewTicket->date, "%s", getDate());
-  // sprintf(pNewTicket->time, "%s", getTime());
+  // Hora y Fecha
+  strcpy(pNewTicket->date, getDate());
+  strcpy(pNewTicket->time, getTime());
 	
   // Items del ticket
   while (seguir){

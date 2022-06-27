@@ -18,7 +18,7 @@ struct Item *GetProductById(int id)
   return NULL;
 }
 
-void InsertItemTicket()
+int InsertItemTicket()
 {
   int option;
   struct ItemTicket *pNewItemTicket = (struct ItemTicket *)malloc(sizeof(struct ItemTicket));
@@ -47,9 +47,16 @@ void InsertItemTicket()
       pNewItemTicket->next = pAuxItemTicket;
       pAuxItemTicket = pNewItemTicket;
     }
+    return 1;
+  }
+  else if (option == -1)
+  {
+    printf("\nDeteniendo carga de tickets\n");
+    return 0;
   }
   else
   {
     PrintMessageError("Debe de haber al menos un producto para generar un ticket", "Error");
+    return 1;
   }
 }

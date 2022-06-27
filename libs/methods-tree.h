@@ -6,7 +6,7 @@ void InsertTicket()
 {
   struct Ticket *pNewTicketTreeItem = (struct Ticket *)malloc(sizeof(struct Ticket));
   int cant_prod_min;
-
+  int seguir = 1;
   // Init
   cant_prod_min = 0;
 
@@ -18,15 +18,16 @@ void InsertTicket()
   strcpy(pNewTicketTreeItem->time, getTime());
 
   // Items del ticket
-  while (cant_prod_min <= 3)
+  while (seguir)
   {
-    InsertItemTicket();
-    cant_prod_min++;
+    seguir = InsertItemTicket();
+    if (seguir)
+      cant_prod_min++;
   }
   pNewTicketTreeItem->ProductsTicket = pAuxItemTicket;
 
   // Responsabilidad frente al IVA del emisor
-  strcpy(pNewTicketTreeItem->resIVA, IVAResponsability());
+  // strcpy(pNewTicketTreeItem->resIVA, IVAResponsability());
 
   // Enlazar el nuevo nodo con el arbol
   if (pTicketTree == NULL)
@@ -160,7 +161,7 @@ void PrintTicketTreePre(struct Ticket *CopyTicketTree)
     printf("Ticket #%d\n", CopyTicketTree->id);
     printf("Fecha: %s\n", CopyTicketTree->date);
     printf("Hora: %s\n", CopyTicketTree->time);
-    printf("Responsabilidad IVA: %s\n", CopyTicketTree->resIVA);
+    printf("IVA RESPONSABLE INSCRIPTO %s\n", CopyTicketTree->resIVA);
     printf("A CONSUMIDOR FINAL\n\n");
 
     // Imprimir el Header de los items del ticket

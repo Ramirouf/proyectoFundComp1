@@ -10,13 +10,11 @@
 #include "./libs/methods-tree.h"
 
 // Testing
-#include<conio.h>
+#include <conio.h>
 // Testing
 
-
-
-
-struct ConfigTicket GetConfigTicket(char *mode){
+struct ConfigTicket GetConfigTicket(char *mode)
+{
 	// File mode - https://www.tutorialesprogramacionya.com/cya/detalleconcepto.php?punto=80&codigo=80&inicio=75
 	struct ConfigTicket config;
 	FILE *fptr; // File pointer
@@ -25,7 +23,8 @@ struct ConfigTicket GetConfigTicket(char *mode){
 	fptr = fopen(filename, mode); // Open the file
 
 	// Program exits if the file pointer returns NULL.
-	if (fptr == NULL){
+	if (fptr == NULL)
+	{
 		printf("Error! opening file");
 		exit(1);
 	}
@@ -37,7 +36,8 @@ struct ConfigTicket GetConfigTicket(char *mode){
 	return config;
 }
 
-void PreviewTicket(){
+void PreviewTicket()
+{
 	// Ticket data
 	struct ConfigTicket configT;
 	char *mode = "r";
@@ -46,22 +46,21 @@ void PreviewTicket(){
 	int WIDTH_TICKET = 50;
 
 	MenuTitle("Preview Ticket");
-	// Line Top 
+	// Line Top
 	SeparateLine(WIDTH_TICKET);
 
 	// Print Text in the middle
 	PrintInTheMiddle(configT.businessName, WIDTH_TICKET);
 
-
 	SeparateCross(WIDTH_TICKET);
 	SeparateCross(WIDTH_TICKET);
 
-	// Line Bottom 
+	// Line Bottom
 	SeparateLine(WIDTH_TICKET);
-
 }
 
-void PrintConfigTicket(){
+void PrintConfigTicket()
+{
 	char *mode = "at";
 	struct ConfigTicket config;
 	config = GetConfigTicket(mode);
@@ -76,7 +75,8 @@ void PrintConfigTicket(){
 	printf("- Leyenda: %s\n", config.messageGB);
 }
 
-void SetConfigTicket(){
+void SetConfigTicket()
+{
 	struct ConfigTicket config;
 
 	FILE *fptr;
@@ -111,11 +111,12 @@ void SetConfigTicket(){
 	fclose(fptr);
 }
 
-
-void TicketSettings(){
+void TicketSettings()
+{
 	int option;
 
-	do{
+	do
+	{
 		MenuTitle("CONFIGURACION DE TICKET");
 		printf("1) Ver informacion\n");
 		printf("2) Cambiar informacion\n");
@@ -127,33 +128,34 @@ void TicketSettings(){
 		printf("Ingrese una opcion: ");
 		scanf("%d", &option);
 
-		switch (option){
-			case 1:
-				printf("\n");
-				PrintConfigTicket();
-				printf("\n\n");
-				break;
-			case 2:
-				printf("\n");
-				SetConfigTicket();
-				printf("\n\n");
-				break;
-			case 3:
-				printf("\n");
-				PreviewTicket();
-				printf("\n\n");
-				break;
-			case 4:
-				// Vuelve al menu principal
-				break;
-			default:
-				printf("Opcion no valida\n");
+		switch (option)
+		{
+		case 1:
+			printf("\n");
+			PrintConfigTicket();
+			printf("\n\n");
+			break;
+		case 2:
+			printf("\n");
+			SetConfigTicket();
+			printf("\n\n");
+			break;
+		case 3:
+			printf("\n");
+			PreviewTicket();
+			printf("\n\n");
+			break;
+		case 4:
+			// Vuelve al menu principal
+			break;
+		default:
+			printf("Opcion no valida\n");
 		}
 	} while (option != 4);
-
 }
 
-void GenerateTicket(){
+void GenerateTicket()
+{
 	// Pasos para generar un ticket
 	// 1. Elegir un item del menu (se muestra el nombre y el precio)
 	// 2. Elegir la cantidad de items
@@ -168,25 +170,28 @@ void GenerateTicket(){
 	// Implementacion
 	// 1. Elegir un item del menu (se muestra el nombre y el precio)
 
-
-	//TESTING
+	// TESTING
 	printf("AGREGANDO TICKET...\n");
+	printf("Ingrese codigo de producto -1 para terminar\n");
 	InsertTicket();
 	printf("TICKET AGREGADO\n");
 	// TESTING
 }
 
-void ViewAllTickets(){
+void ViewAllTickets()
+{
 	// Imprimir direccion de memoria de todos los tickets
 	printf("TODOS LOS TICKETS\n");
 	PrintTicketTreePre(pTicketTree);
 	printf("\nFin.\n");
 }
 
-void MenuSystem(){
+void MenuSystem()
+{
 	int option;
 
-	do{
+	do
+	{
 		MenuTitle("MENU PRINCIPAL");
 		printf("1) Generar un Ticket\n");
 		printf("2) Validar un Ticket (dont work)\n");
@@ -206,59 +211,59 @@ void MenuSystem(){
 		printf("Ingrese una opcion: ");
 		scanf("%d", &option);
 
-		switch (option){
-			case 1:
-				printf("\n\n");
-				GenerateTicket();
-				printf("\n\n");
-				break;
-			case 2:
-				printf("\n\n");
-				// ValidateTicket ();
-				printf("\n\n");
-				break;
-			case 3:
-				printf("\n\n");
-				// ViewTicket ();
-				printf("\n\n");
-				break;
-			case 4:
-				printf("\n\n");
-				ViewAllTickets();
-				printf("\n\n");
-				break;
-			case 5:
-				printf("\n\n");
-				// AccountSettings ();
-				printf("\n\n");
-				break;
-			case 6:
-				printf("\n\n");
-				TicketSettings();
-				printf("\n\n");
-				break;
-			case 7:
-				printf("\n\n");
-				// Logout ();
-				printf("\n\n");
-				break;
-			case 8:
-				printf("\n\n");
-				// Exit ();
-				printf("\n\n");
-				break;
-			default:
-				PrintMessageError("Opcion invalida", "Error");
+		switch (option)
+		{
+		case 1:
+			printf("\n\n");
+			GenerateTicket();
+			printf("\n\n");
+			break;
+		case 2:
+			printf("\n\n");
+			// ValidateTicket ();
+			printf("\n\n");
+			break;
+		case 3:
+			printf("\n\n");
+			// ViewTicket ();
+			printf("\n\n");
+			break;
+		case 4:
+			printf("\n\n");
+			ViewAllTickets();
+			printf("\n\n");
+			break;
+		case 5:
+			printf("\n\n");
+			// AccountSettings ();
+			printf("\n\n");
+			break;
+		case 6:
+			printf("\n\n");
+			TicketSettings();
+			printf("\n\n");
+			break;
+		case 7:
+			printf("\n\n");
+			// Logout ();
+			printf("\n\n");
+			break;
+		case 8:
+			printf("\n\n");
+			// Exit ();
+			printf("\n\n");
+			break;
+		default:
+			PrintMessageError("Opcion invalida", "Error");
 		}
 	} while (option != 8);
 }
 
-int main(){
+int main()
+{
 
 	SetListProducts(); // Inicializar la lista de productos global
 	MenuSystem();
 
-
 	return 0;
 }
-

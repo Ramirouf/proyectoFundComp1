@@ -58,17 +58,17 @@ void PreviewTicket(){
 }
 
 void PrintConfigTicket(){
-	struct ConfigTicket *configT = GetConfigTicket();
+	// struct ConfigTicket *configT = GetConfigTicket();
 
 	// Print the text from the file.
 	printf("INFORMACION DEL TICKET\n\n");
-	printf("Nombre de la empresa: %s", configT->businessName);
-	printf("Direccion: %s", configT->address);
-	printf("Telefono: %s", configT->phone);
-	printf("Codigo Postal: %s", configT->postalCode);
-	printf("CUIT: %s", configT->cuit);
-	printf("Responsabilidad IVA: %s", configT->resIVA);
-	printf("Mensaje de Gracias: %s", configT->messageGB);
+	printf("Nombre de la empresa: %s", pConfigTicket->businessName);
+	printf("Direccion: %s", pConfigTicket->address);
+	printf("Telefono: %s", pConfigTicket->phone);
+	printf("Codigo Postal: %s", pConfigTicket->postalCode);
+	printf("CUIT: %s", pConfigTicket->cuit);
+	printf("Responsabilidad IVA: %s", pConfigTicket->resIVA);
+	printf("Mensaje de Gracias: %s", pConfigTicket->messageGB);
 	printf("\n");
 }
 
@@ -76,7 +76,7 @@ void SetConfigTicket(){
 	char *filename = "./public/ticket_config.txt";
 	char *mode = "w";
 
-	struct ConfigTicket config;
+	pConfigTicket = (struct Ticket *)malloc(sizeof(struct Ticket));
 
 	FILE *fptr;
 	fptr = fopen(filename, mode);
@@ -85,37 +85,37 @@ void SetConfigTicket(){
 
 	printf("Ingrese la razon social: ");
 	fflush(stdin);
-	gets(config.businessName);
+	gets(pConfigTicket->businessName);
 
 	printf("Ingrese la direccion: ");
 	fflush(stdin);
-	gets(config.address);
+	gets(pConfigTicket->address);
 
 	printf("Ingrese el telefono: ");
 	fflush(stdin);
-	gets(config.phone);
+	gets(pConfigTicket->phone);
 
 	printf("Ingrese el codigo postal: ");
 	fflush(stdin);
-	gets(config.postalCode);
+	gets(pConfigTicket->postalCode);
 
 	printf("Ingrese el CUIT: ");
 	fflush(stdin);
-	gets(config.cuit);
+	gets(pConfigTicket->cuit);
 
-	sprintf(config.resIVA, "%s", IVAResponsability());
+	sprintf(pConfigTicket->resIVA, "%s", IVAResponsability());
 
 	printf("Ingrese el mensaje de Leyenda(mensaje al final del Ticket): ");
 	fflush(stdin);
-	gets(config.messageGB);
+	gets(pConfigTicket->messageGB);
 
-	fprintf(fptr, "%s\n", config.businessName);
-	fprintf(fptr, "%s\n", config.address);
-	fprintf(fptr, "%s\n", config.phone);
-	fprintf(fptr, "%s\n", config.postalCode);
-	fprintf(fptr, "%s\n", config.cuit);
-	fprintf(fptr, "%s\n", config.resIVA);
-	fprintf(fptr, "%s\n", config.messageGB);
+	fprintf(fptr, "%s", pConfigTicket->businessName);
+	fprintf(fptr, "%s", pConfigTicket->address);
+	fprintf(fptr, "%s", pConfigTicket->phone);
+	fprintf(fptr, "%s", pConfigTicket->postalCode);
+	fprintf(fptr, "%s", pConfigTicket->cuit);
+	fprintf(fptr, "%s", pConfigTicket->resIVA);
+	fprintf(fptr, "%s", pConfigTicket->messageGB);
 
 	printf("\nTICKET CONFIGURADO CORRECTAMENTE\n\n");
 
@@ -164,6 +164,7 @@ void TicketSettings(){
 
 					if (selection){
 						SetConfigTicket();
+						pConfigTicket = GetConfigTicket();
 					} else{ printf("\nNO SE REESTABLECIO LA CONFIGURACION DEL TICKET\n\n"); }
 
 				} else{
@@ -190,12 +191,12 @@ void TicketSettings(){
 	} while (option != 4);
 }
 
-void GenerateTicket(){
-	// Ticket data
-	printf("GENERANDO UN NUEVO TICKET\n\n");
-	InsertTicket();
-	printf("TICKET GENERADO\n");
-}
+// void GenerateTicket(){
+// 	// Ticket data
+// 	printf("GENERANDO UN NUEVO TICKET\n\n");
+// 	InsertTicket();
+// 	printf("TICKET GENERADO\n");
+// }
 
 void ViewAllTickets(){
 	// Si no hay tickets, no se muestra nada

@@ -116,7 +116,7 @@ void PrintItemTicket(struct ItemTicket *pItemTicket){
     printf("\t\t\t\tTOTAL: $ %.2f", total);
     printf("\n------------------------------------------------\n");
   }
-  printf("\n\n");
+  printf("\n");
 }
 
 void PrintTicket(struct Ticket *pTicket){
@@ -125,6 +125,15 @@ void PrintTicket(struct Ticket *pTicket){
 
   // Imprimir los metadatos del ticket
   printf("Ticket #%d\n", pTicket->id);
+
+  // Config Ticket
+  printf("Razon Social: %s\n", pConfigTicket->businessName);
+  printf("Direccion: %s\n", pConfigTicket->address);
+  printf("Telefono: %s\n", pConfigTicket->phone);
+  printf("Codigo Postal: %s\n", pConfigTicket->postalCode);
+  printf("CUIT: %s\n", pConfigTicket->cuit);
+  printf("Res IVA: %s\n", pConfigTicket->resIVA);
+
   printf("Fecha: %s\n", pTicket->date);
   printf("Hora: %s\n", pTicket->time);
   printf("A CONSUMIDOR FINAL\n\n");
@@ -140,6 +149,9 @@ void PrintTicket(struct Ticket *pTicket){
 
   // Imprimir los items del ticket
   PrintItemTicket(pTicket->ProductsTicket);
+
+  // Leyenda
+  printf("### %s ###", pConfigTicket->messageGB);
 }
 
 void PrintTicketTreePre(struct Ticket *CopyTicketTree){

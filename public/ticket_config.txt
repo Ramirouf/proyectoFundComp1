@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-Carlos SACalle Falsa 12337469119113300el mensaje de Leyenda(mensaje al finalGraciase Leyenda(mensaje al finalGraciasGracias
-=======
 Panaderia Ramiro
 Carhue 876
 3764832501
@@ -8,4 +5,3 @@ Carhue 876
 20437585491
 Responsable Monotributo
 Gracias !
->>>>>>> 01f5db30a53124c16b91a5370c6334c6d49a1c48

@@ -11,11 +11,16 @@
 #define ITEM_NAME_LENGTH 41
 
 #define TICKET_DATE_LENGTH 11 // dd/mm/yyyy (10) mas el \0 (11 )
-#define TICKET_TIME_LENGTH 9 // hh:mm:ss (8) mas el \0 (9)
+#define TICKET_TIME_LENGTH 9  // hh:mm:ss (8) mas el \0 (9)
 
 #define CANT_PRODUCTS 10
 
-struct ConfigTicket{
+/*
+Definicion de los miembros (datos) de cada una de las estructuras utilizadas en el sistema
+*/
+
+struct ConfigTicket
+{
   char businessName[CONFIG_TICKET_NAME_LENGTH];
   char address[CONFIG_TICKET_ADDRESS_LENGTH];
   char phone[CONFIG_TICKET_PHONE_LENGTH];
@@ -26,21 +31,24 @@ struct ConfigTicket{
 };
 
 // Estructura de los Productos
-struct Item{
+struct Item
+{
   int idItem;
   char name[ITEM_NAME_LENGTH];
   double price;
 };
 
 // Estructura de los Productos del Ticket
-struct ItemTicket{
+struct ItemTicket
+{
   float quantity;
   struct Item *itemInfo;
   struct ItemTicket *next;
 };
 
 // Estructura de arbol aVL
-struct Ticket{
+struct Ticket
+{
   int id;
   char date[TICKET_DATE_LENGTH];
   char time[TICKET_TIME_LENGTH];
@@ -50,7 +58,8 @@ struct Ticket{
   int height;
 };
 
-struct ListProducts{
+struct ListProducts
+{
   struct Item itemInfo;
   struct ListProducts *next;
 };

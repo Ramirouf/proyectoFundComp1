@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+// Funciones cortas con utilidades especificas, las cuales se utilizan en todo el sistema
 void SeparateCross(int cant)
 {
   for (int i = 1; i < cant; i++)

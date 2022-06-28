@@ -1,13 +1,15 @@
 // #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-
-char *IVAResponsability(){
+// Definir responsabilidad ante el IVA del emisor del ticket
+char *IVAResponsability()
+{
   int option;
-  char *responsability[] = { "IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo",
-  "Monotributista Social" };
+  char *responsability[] = {"IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo",
+                            "Monotributista Social"};
 
-  do{
+  do
+  {
     printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
     printf("1. IVA Responsable Inscripto\n");
     printf("2. IVA no Responsable\n");
@@ -18,19 +20,14 @@ char *IVAResponsability(){
     printf("Ingrese una opcion: ");
     scanf("%d", &option);
 
-    if (option < 1 || option > 5){
+    if (option < 1 || option > 5)
+    {
       PrintMessage("Opcion invalida", "Error");
     }
   } while (option < 1 || option > 5);
 
   return responsability[option - 1];
 }
-
-
-
-
-
-
 
 // void ListItemsMenu(){
 //   int cont = 1;
@@ -62,14 +59,12 @@ char *IVAResponsability(){
 //   // printf("");
 // }
 
-
 // struct nodo{
 //   int info;
 //   struct nodo *sig;
 // };
 
 // struct nodo *raiz = NULL;
-
 
 // void FreeListTicketItems(){
 //   struct nodo *reco = raiz;
@@ -138,7 +133,6 @@ char *IVAResponsability(){
 //   printf("\n");
 // }
 
-
 // int RemoveItemFromList(int pos){
 //   if (pos <= cantidad()){
 //     int informacion;
@@ -164,7 +158,6 @@ char *IVAResponsability(){
 //   } else
 //     return -1;
 // }
-
 
 // void borrar(int pos){
 //   if (pos <= cantidad()){
@@ -268,7 +261,6 @@ char *IVAResponsability(){
 //   return 0;
 // }
 
-
 // // int main(){
 // //   insertar(1, 10);
 // //   insertar(2, 20);
@@ -298,5 +290,3 @@ char *IVAResponsability(){
 // //   getch();
 // //   return 0;
 // // }
-
-

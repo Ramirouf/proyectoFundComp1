@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <string.h>
-
+// Insertar un producto en un ticket
 struct Item *GetProductById(int id)
 {
   struct ListProducts *product = pListProducts;

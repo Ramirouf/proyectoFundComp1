@@ -1,9 +1,10 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <time.h>
-#include <stdint.h> 
+#include <stdint.h>
 
-
-char *getDate(){
+// Funciones para obtener la fecha y hora, para guardar en el ticket
+char *getDate()
+{
   char *date = (char *)malloc(sizeof(char) * 11);
 
   time_t t = time(NULL);
@@ -16,7 +17,8 @@ char *getDate(){
   return date;
 }
 
-char *getTime(){
+char *getTime()
+{
   char *dateTime = (char *)malloc(sizeof(char) * 9);
 
   time_t t = time(NULL);

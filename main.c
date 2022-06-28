@@ -190,6 +190,7 @@ void TicketSettings(){
 		}
 	} while (option != 4);
 }
+<<<<<<< HEAD
 
 // void GenerateTicket(){
 // 	// Ticket data
@@ -198,6 +199,16 @@ void TicketSettings(){
 // 	printf("TICKET GENERADO\n");
 // }
 
+=======
+/*
+void GenerateTicket(){
+	// Ticket data
+	printf("GENERANDO UN NUEVO TICKET\n\n");
+	InsertTicket();
+	printf("TICKET GENERADO\n");
+}
+*/
+>>>>>>> 01f5db30a53124c16b91a5370c6334c6d49a1c48
 void ViewAllTickets(){
 	// Si no hay tickets, no se muestra nada
 	if (pTicketTree == NULL){

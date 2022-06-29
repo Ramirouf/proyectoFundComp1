@@ -68,7 +68,7 @@ void SetListProducts(){
   size_t len = 0;
   size_t read;
 
-  char *filename = "src/public/products.txt";
+  char *filename = "./public/products.txt";
   char *mode = "r";
   fp = fopen(filename, mode);
   if (fp == NULL)

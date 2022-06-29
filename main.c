@@ -27,13 +27,14 @@
 // Inciar Sesion
 // Configurar Ticket
 // Menu Clasico (MenuSystem)
-
+#include "src/libs/login.h"
 int main()
 {
 	// InitialConfigUser();
-	InitialConfigTicket();
-	SetListProducts(); // Inicializar la lista de productos global
-	MenuSystem();
+	menuInicial();
+	// InitialConfigTicket();
+	// SetListProducts(); // Inicializar la lista de productos global
+	// MenuSystem();
 
 	return 0;
 }

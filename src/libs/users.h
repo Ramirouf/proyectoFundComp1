@@ -1,24 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-void AddUser(char *infoUser){
+void AddUser(char *infoUser)
+{
   struct ListUsers *newUser;
   newUser = malloc(sizeof(struct ListUsers));
 
   sscanf(infoUser, "%[^,],%[^,],%[^,]", newUser->user.name, newUser->user.username, newUser->user.password);
 
   // Agregar a la lista de usuarios
-  if (pListUsers == NULL){
+  if (pListUsers == NULL)
+  {
     pListUsers = newUser;
     newUser->next = NULL;
-  } else{
+  }
+  else
+  {
     newUser->next = pListUsers;
     pListUsers = newUser;
   }
 }
 
-void SetListUsers(){
+void SetListUsers()
+{
   FILE *fp;
   char *line = NULL;
   size_t len = 0;
@@ -27,9 +31,11 @@ void SetListUsers(){
   char *filename = "./public/users.txt";
   char *mode = "r";
   fp = fopen(filename, mode);
-  if (fp == NULL) exit(EXIT_FAILURE);
+  if (fp == NULL)
+    exit(EXIT_FAILURE);
 
-  while ((read = getline(&line, &len, fp)) != -1){
+  while ((read = getline(&line, &len, fp)) != -1)
+  {
     AddUser(line);
   }
 
@@ -37,8 +43,8 @@ void SetListUsers(){
   fclose(fp);
 }
 
-
-void InitialConfigUser(){
+void InitialConfigUser()
+{
   pListUsers = (struct ListUsers *)malloc(sizeof(struct ListUsers));
 
   pListUsers->next = NULL;
@@ -62,9 +68,10 @@ void InitialConfigUser(){
   char *filename = "./public/users.txt";
   char *mode = "w";
   fp = fopen(filename, mode);
-  if (fp == NULL) exit(EXIT_FAILURE);
+  if (fp == NULL)
+    exit(EXIT_FAILURE);
 
-  fprintf(fp, "%s,%s,%s,%d\n", Encrypt(pListUsers->user.name), Encrypt(pListUsers->user.username), Encrypt(pListUsers->user.password));
+  fprintf(fp, "%s,%s,%s\n", Encrypt(pListUsers->user.name), Encrypt(pListUsers->user.username), Encrypt(pListUsers->user.password));
 
   fclose(fp);
 

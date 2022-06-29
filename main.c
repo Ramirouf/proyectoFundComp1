@@ -28,17 +28,12 @@
 // Configurar Ticket
 // Menu Clasico (MenuSystem)
 
-void System(){
-	int option;
-
-}
-
-int main(){
-	InitialConfigUser();
+int main()
+{
+	// InitialConfigUser();
 	InitialConfigTicket();
 	SetListProducts(); // Inicializar la lista de productos global
 	MenuSystem();
-
 
 	return 0;
 }

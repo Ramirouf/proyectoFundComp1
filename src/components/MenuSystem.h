@@ -5,6 +5,7 @@ void MenuSystem(){
   int option;
 
   do{
+    printf("\n\n");
     MenuTitle("MENU PRINCIPAL");
     printf("1) Generar un Ticket\n");
     printf("2) Ver un Ticket\n");

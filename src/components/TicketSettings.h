@@ -5,6 +5,7 @@ void TicketSettings(){
   int option;
 
   do{
+    printf("\n\n");
     MenuTitle("CONFIGURACION DE TICKET");
     printf("1) Ver informacion\n");
     printf("2) Establecer informacion\n");
@@ -18,13 +19,8 @@ void TicketSettings(){
 
     switch (option){
       case 1:
-        if (setTicket){
-          printf("\n");
-          PrintConfigTicket();
-          printf("\n\n");
-        } else{
-          PrintMessage("Todavia no se establecio la configuracion del ticket", "Atencion");
-        }
+        printf("\n");
+        PrintConfigTicket();
         break;
       case 2:
         if (setTicket){
@@ -40,32 +36,19 @@ void TicketSettings(){
             printf("Ingrese una opcion: ");
             scanf("%d", &selection);
             if (selection != 1 && selection != 2) PrintMessage("Opcion invalida", "Atencion");
-
           } while (selection != 1 && selection != 2);
 
-          if (selection == 2)
-            selection = 0;
-
-          if (selection){
+          if (selection == 1){
             SetConfigTicket();
-            pConfigTicket = GetConfigTicket();
           } else{
-            printf("\nNO SE REESTABLECIO LA CONFIGURACION DEL TICKET\n\n");
+            printf("\nSE CANCELO REESTABLECIO LA CONFIGURACION DEL TICKET\n\n");
           }
         } else{
           SetConfigTicket();
         }
-        // Ya se configuro el ticket
-        setTicket = 1;
         break;
       case 3:
-        if (setTicket){
-          printf("\n");
-          PreviewTicket();
-          printf("\n\n");
-        } else{
-          PrintMessage("Todavia no se establecio la configuracion del ticket", "Atencion");
-        }
+        PreviewTicket();
         break;
       case 4:
         // Vuelve al menu principal

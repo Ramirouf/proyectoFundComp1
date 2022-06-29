@@ -13,12 +13,20 @@
 #include "src/libs/ticket.h"
 
 // Menus y submenus
+#include "./src/components/InitialConfigTicket.h"
 #include "./src/components/TicketSettings.h"
 #include "./src/components/ViewTicket.h"
 #include "./src/components/Exit.h"
 #include "./src/components/MenuSystem.h"
 
+// FLOW DEL PROGRAMA
+// Inciar Sesion
+// Configurar Ticket
+// Menu Clasico (MenuSystem)
+
+
 int main(){
+	InitialConfigTicket();
 	SetListProducts(); // Inicializar la lista de productos global
 	MenuSystem();
 

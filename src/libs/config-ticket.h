@@ -31,7 +31,7 @@ void SetConfigTicket(){
   char *filename = "./public/ticket_config.txt";
   char *mode = "w";
 
-  pConfigTicket = (struct ConfigTicket *)malloc(sizeof(struct ConfigTicket));
+  struct ConfigTicket configT;
 
   FILE *fptr;
   fptr = fopen(filename, mode);
@@ -40,37 +40,37 @@ void SetConfigTicket(){
 
   printf("Ingrese la razon social: ");
   fflush(stdin);
-  gets(pConfigTicket->businessName);
+  gets(configT.businessName);
 
   printf("Ingrese la direccion: ");
   fflush(stdin);
-  gets(pConfigTicket->address);
+  gets(configT.address);
 
   printf("Ingrese el telefono: ");
   fflush(stdin);
-  gets(pConfigTicket->phone);
+  gets(configT.phone);
 
   printf("Ingrese el codigo postal: ");
   fflush(stdin);
-  gets(pConfigTicket->postalCode);
+  gets(configT.postalCode);
 
   printf("Ingrese el CUIT: ");
   fflush(stdin);
-  gets(pConfigTicket->cuit);
+  gets(configT.cuit);
 
-  sprintf(pConfigTicket->resIVA, "%s", IVAResponsability());
+  sprintf(configT.resIVA, "%s", IVAResponsability());
 
   printf("Ingrese el mensaje de Leyenda(mensaje al final del Ticket): ");
   fflush(stdin);
-  gets(pConfigTicket->messageGB);
+  gets(configT.messageGB);
 
-  fprintf(fptr, "%s", pConfigTicket->businessName);
-  fprintf(fptr, "%s", pConfigTicket->address);
-  fprintf(fptr, "%s", pConfigTicket->phone);
-  fprintf(fptr, "%s", pConfigTicket->postalCode);
-  fprintf(fptr, "%s", pConfigTicket->cuit);
-  fprintf(fptr, "%s", pConfigTicket->resIVA);
-  fprintf(fptr, "%s", pConfigTicket->messageGB);
+  fprintf(fptr, "%s,", configT.businessName);
+  fprintf(fptr, "%s,", configT.address);
+  fprintf(fptr, "%s,", configT.phone);
+  fprintf(fptr, "%s,", configT.postalCode);
+  fprintf(fptr, "%s,", configT.cuit);
+  fprintf(fptr, "%s,", configT.resIVA);
+  fprintf(fptr, "%s", configT.messageGB);
 
   printf("\nTICKET CONFIGURADO CORRECTAMENTE\n\n");
 
@@ -84,25 +84,13 @@ struct ConfigTicket *GetConfigTicket(){
   char *mode = "r";
   char *line = NULL;
   size_t len = 0;
-  size_t read;
 
   fptr = fopen(filename, mode);
   if (fptr == NULL)	exit(EXIT_FAILURE);
 
-  read = getline(&line, &len, fptr);
-  sprintf(config->businessName, "%s", line);
-  read = getline(&line, &len, fptr);
-  sprintf(config->address, "%s", line);
-  read = getline(&line, &len, fptr);
-  sprintf(config->phone, "%s", line);
-  read = getline(&line, &len, fptr);
-  sprintf(config->postalCode, "%s", line);
-  read = getline(&line, &len, fptr);
-  sprintf(config->cuit, "%s", line);
-  read = getline(&line, &len, fptr);
-  sprintf(config->resIVA, "%s", line);
-  read = getline(&line, &len, fptr);
-  sprintf(config->messageGB, "%s", line);
+  getline(&line, &len, fptr);
+  // %[^,] -> Lee hasta que encuentre una coma
+  sscanf(line, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,]", config->businessName, config->address, config->phone, config->postalCode, config->cuit, config->resIVA, config->messageGB);
 
   free(line);
   fclose(fptr);
@@ -111,16 +99,17 @@ struct ConfigTicket *GetConfigTicket(){
 }
 
 void PrintConfigTicket(){
-  // struct ConfigTicket *configT = GetConfigTicket();
+  struct ConfigTicket *configT = GetConfigTicket();
 
   // Print the text from the file.
-  printf("INFORMACION DEL TICKET\n\n");
-  printf("- Nombre de la empresa: %s\n", pConfigTicket->businessName);
-  printf("- Direccion: %s\n", pConfigTicket->address);
-  printf("- Telefono: %s\n", pConfigTicket->phone);
-  printf("- Codigo Postal: %s\n", pConfigTicket->postalCode);
-  printf("- CUIT: %s\n", pConfigTicket->cuit);
-  printf("- Responsabilidad IVA: %s\n", pConfigTicket->resIVA);
-  printf("- Mensaje de Gracias: %s\n", pConfigTicket->messageGB);
-  printf("\n");
+  printf("CONFIGURACION DEL TICKET\n\n");
+  printf("- Nombre de la empresa: %s\n", configT->businessName);
+  printf("- Direccion: %s\n", configT->address);
+  printf("- Telefono: %s\n", configT->phone);
+  printf("- Codigo Postal: %s\n", configT->postalCode);
+  printf("- CUIT: %s\n", configT->cuit);
+  printf("- Responsabilidad IVA: %s\n", configT->resIVA);
+  printf("- Mensaje de Gracias: %s\n", configT->messageGB);
+
+  free(configT);
 }

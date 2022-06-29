@@ -65,5 +65,3 @@ int id_tickets = 1;
 // 0: No se configuro el Ticket
 // 1: Se configuro el Ticket
 int setTicket = 0;
-
-struct ConfigTicket *pConfigTicket = NULL;

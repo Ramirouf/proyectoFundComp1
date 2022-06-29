@@ -10,6 +10,8 @@
     "config-ticket.h": "c",
     "exit.h": "c",
     "ticketsettings.h": "c",
-    "viewticket.h": "c"
+    "viewticket.h": "c",
+    "method-product-ticket.h": "c",
+    "initialconfigticket.h": "c"
   }
 }

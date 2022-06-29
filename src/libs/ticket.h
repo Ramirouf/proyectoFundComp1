@@ -38,6 +38,8 @@ void PrintTicket(struct Ticket *pTicket){
   // Imprimir los metadatos del ticket
   printf("Ticket #%d\n", pTicket->id);
 
+  struct ConfigTicket *pConfigTicket = GetConfigTicket();
+
   // Config Ticket
   printf("Razon Social: %s\n", pConfigTicket->businessName);
   printf("Direccion: %s\n", pConfigTicket->address);
@@ -64,6 +66,9 @@ void PrintTicket(struct Ticket *pTicket){
 
   // Leyenda
   printf("### %s ###\n\n", pConfigTicket->messageGB);
+
+  // Liberar memoria
+  free(pConfigTicket);
 }
 
 void PrintTicketTreePre(struct Ticket *CopyTicketTree){

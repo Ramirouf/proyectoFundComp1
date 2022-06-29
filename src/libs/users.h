@@ -71,5 +71,5 @@ void InitialConfigUser(){
   printf("\nUSUARIO CREADO CON EXITO\n");
   printf("Ahora debe iniciar sesion\n");
 
-  SetListUsers();
+  // SetListUsers();
 }

@@ -4,6 +4,12 @@
     "methods-ticket.h": "c",
     "methods-tree.h": "c",
     "products.h": "c",
-    "methods-item-ticket.h": "c"
+    "methods-item-ticket.h": "c",
+    "momentc.h": "c",
+    "stdio.h": "c",
+    "config-ticket.h": "c",
+    "exit.h": "c",
+    "ticketsettings.h": "c",
+    "viewticket.h": "c"
   }
 }

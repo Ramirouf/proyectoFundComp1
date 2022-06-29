@@ -6,7 +6,7 @@
 #define CONFIG_TICKET_CP_LENGTH 51
 #define CONFIG_TICKET_CUIT_LENGTH 12
 #define CONFIG_TICKET_RES_IVA_LENGTH 26
-#define CONFIG_TICKET_GB_LENGTH 21
+#define CONFIG_TICKET_GB_LENGTH 31
 
 #define ITEM_NAME_LENGTH 41
 
@@ -15,12 +15,7 @@
 
 #define CANT_PRODUCTS 10
 
-/*
-Definicion de los miembros (datos) de cada una de las estructuras utilizadas en el sistema
-*/
-
-struct ConfigTicket
-{
+struct ConfigTicket{
   char businessName[CONFIG_TICKET_NAME_LENGTH];
   char address[CONFIG_TICKET_ADDRESS_LENGTH];
   char phone[CONFIG_TICKET_PHONE_LENGTH];
@@ -31,24 +26,21 @@ struct ConfigTicket
 };
 
 // Estructura de los Productos
-struct Item
-{
+struct Item{
   int idItem;
   char name[ITEM_NAME_LENGTH];
   double price;
 };
 
 // Estructura de los Productos del Ticket
-struct ItemTicket
-{
+struct ItemTicket{
   float quantity;
   struct Item *itemInfo;
   struct ItemTicket *next;
 };
 
 // Estructura de arbol aVL
-struct Ticket
-{
+struct Ticket{
   int id;
   char date[TICKET_DATE_LENGTH];
   char time[TICKET_TIME_LENGTH];
@@ -58,8 +50,7 @@ struct Ticket
   int height;
 };
 
-struct ListProducts
-{
+struct ListProducts{
   struct Item itemInfo;
   struct ListProducts *next;
 };

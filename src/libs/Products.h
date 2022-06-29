@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 // Funciones para manipular los productos
+
 void PrintListProducts(){
   // printf("Selecciona un producto: \n\n");
   printf("SELECCIONA UN PRODUCTO \n\n");

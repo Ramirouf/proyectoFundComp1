@@ -4,6 +4,9 @@
 // Globales
 #include "src/libs/Init.h"
 #include "src/libs/utilities.h"
+#include "src/libs/crypt.h"
+#include "src/libs/login-methods.h"
+#include "src/libs/users.h"
 
 // Esenciales
 #include "src/libs/products.h"
@@ -12,7 +15,8 @@
 #include "src/libs/method-tree.h"
 #include "src/libs/ticket.h"
 
-// Menus y submenus
+// Menus, submenus, etc.
+#include "src/components/Login.h"
 #include "./src/components/InitialConfigTicket.h"
 #include "./src/components/TicketSettings.h"
 #include "./src/components/ViewTicket.h"
@@ -24,11 +28,17 @@
 // Configurar Ticket
 // Menu Clasico (MenuSystem)
 
+void System(){
+	int option;
+
+}
 
 int main(){
+	InitialConfigUser();
 	InitialConfigTicket();
 	SetListProducts(); // Inicializar la lista de productos global
 	MenuSystem();
+
 
 	return 0;
 }

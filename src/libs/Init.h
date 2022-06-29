@@ -15,6 +15,21 @@
 
 #define CANT_PRODUCTS 10
 
+#define USER_USERNAME_LENGTH 21
+#define USER_PASSWORD_LENGTH 51
+#define USER_NAME_LENGTH 51
+
+struct User{
+  char username[USER_USERNAME_LENGTH];
+  char password[USER_PASSWORD_LENGTH];
+  char name[USER_NAME_LENGTH];
+};
+
+struct ListUsers{
+  struct User user;
+  struct ListUsers *next;
+};
+
 struct ConfigTicket{
   char businessName[CONFIG_TICKET_NAME_LENGTH];
   char address[CONFIG_TICKET_ADDRESS_LENGTH];
@@ -65,3 +80,7 @@ int id_tickets = 1;
 // 0: No se configuro el Ticket
 // 1: Se configuro el Ticket
 int setTicket = 0;
+
+// USER SECTION
+struct User *pSessionUser = NULL;
+struct ListUsers *pListUsers = NULL;

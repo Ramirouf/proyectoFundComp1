@@ -12,6 +12,7 @@
     "ticketsettings.h": "c",
     "viewticket.h": "c",
     "method-product-ticket.h": "c",
-    "initialconfigticket.h": "c"
+    "initialconfigticket.h": "c",
+    "menusystem.h": "c"
   }
 }

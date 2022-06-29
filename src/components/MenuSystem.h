@@ -16,7 +16,7 @@ void MenuSystem(){
     MenuTitle("MENU SYSTEM");
     printf("4) Configuracion de cuenta (?)\n");
     printf("5) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
-    printf("6) Cerrar sesion (?)\n");
+    printf("6) Cerrar sesion\n");
     printf("7) Salir\n");
 
     printf("\n");
@@ -51,7 +51,8 @@ void MenuSystem(){
         break;
       case 6:
         printf("\n\n");
-        // Logout ();
+        LogOut();
+        Login();
         printf("\n\n");
         break;
       case 7:

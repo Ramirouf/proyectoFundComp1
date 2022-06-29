@@ -1,113 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/*
-Funciones relacionadas al arbol de tickets
-*/
-// void InsertTicket(){
-//   struct Ticket *pNewTicketTreeItem = (struct Ticket *)malloc(sizeof(struct Ticket));
-//   int cant_prod_min;
-//   int seguir = 1;
-//   // Init
-//   cant_prod_min = 0;
 
-//   // DATOS DEL TICKET
-//   // id
-//   pNewTicketTreeItem->id = id_tickets;
-//   // Hora y Fecha
-//   strcpy(pNewTicketTreeItem->date, getDate());
-//   strcpy(pNewTicketTreeItem->time, getTime());
+// Funciones relacionadas al arbol de tickets
 
-//   // Items del ticket
-//   while (seguir){
-//     seguir = InsertItemTicket();
-//     if (seguir)
-//       cant_prod_min++;
-//   }
-//   pNewTicketTreeItem->ProductsTicket = pAuxItemTicket;
-
-//   // Enlazar el nuevo nodo con el arbol
-//   if (pTicketTree == NULL){
-//     pTicketTree = pNewTicketTreeItem;
-//     pNewTicketTreeItem->left = NULL;
-//     pNewTicketTreeItem->right = NULL;
-//     pNewTicketTreeItem->height = 0;
-//   } else{
-//     struct Ticket *previus = NULL;
-//     struct Ticket *current = pTicketTree;
-//     while (current != NULL){
-//       previus = current;
-//       if (pNewTicketTreeItem->id < current->id){
-//         current = current->left;
-//       } else{
-//         current = current->right;
-//       }
-//     }
-//     if (previus->id < pNewTicketTreeItem->id){
-//       previus->right = pNewTicketTreeItem;
-//       pNewTicketTreeItem->left = NULL;
-//       pNewTicketTreeItem->right = NULL;
-//       pNewTicketTreeItem->height = 0;
-//     } else{
-//       previus->left = pNewTicketTreeItem;
-//       pNewTicketTreeItem->left = NULL;
-//       pNewTicketTreeItem->right = NULL;
-//       pNewTicketTreeItem->height = 0;
-//     }
-//   }
-
-//   // Limpio el puntero auxiliar
-//   pAuxItemTicket = NULL;
-
-//   // Incrementa el contador de ID de tickets para el príximo ticket
-//   id_tickets++;
-// }
-
-void PrintItemTable(char *nameProduct, int widthColumn)
-{
+void PrintItemTable(char *nameProduct, int widthColumn){
 	int TEXT_WIDTH = widthColumn - 1; // -1 para el espacio entre el limite del nombre y el final de la columna
 
 	/*
-	  Ejemplos
+		Ejemplos
 
-	  Hola, buenas cómo... | // Esto pasa si la longitud del string es mayor a TEXT_WIDTH
-	  Hola, buenas!        | // Esto pasa si la longitud del string es manor a TEXT_WITDH
-	  Hola, buenas buenas! | // Esto pasa si la longitud del string es igual a TEXT_WIDTH
+		Hola, buenas cómo... | // Esto pasa si la longitud del string es mayor a TEXT_WIDTH
+		Hola, buenas!        | // Esto pasa si la longitud del string es manor a TEXT_WITDH
+		Hola, buenas buenas! | // Esto pasa si la longitud del string es igual a TEXT_WIDTH
 	*/
 
 	int lengthText = strlen(nameProduct);
-	for (int i = 0; i < widthColumn; i++)
-	{
-		if ((lengthText > TEXT_WIDTH) && (i >= (TEXT_WIDTH - 3)))
-		{
+	for (int i = 0; i < widthColumn; i++){
+		if ((lengthText > TEXT_WIDTH) && (i >= (TEXT_WIDTH - 3))){
 			if (i == TEXT_WIDTH)
 				printf(" ");
 			else
 				printf(".");
-		}
-		else
-		{
-			if (i < lengthText)
-			{
+		} else{
+			if (i < lengthText){
 				printf("%c", nameProduct[i]);
-			}
-			else
-			{
+			} else{
 				printf(" ");
 			}
 		}
 	}
 }
 
-void PrintItemTicket(struct ItemTicket *pItemTicket)
-{
+void PrintItemTicket(struct ItemTicket *pItemTicket){
 	int column_width_product = 40;
 	int column_width_subtotal = 10;
 	char text[15];
 	char price[15];
 	double total = 0;
-	while (pItemTicket != NULL)
-	{
+	while (pItemTicket != NULL){
 		PrintItemTable(pItemTicket->itemInfo->name, column_width_product);
 		PrintItemTable("", column_width_subtotal);
 		printf("\n");
@@ -123,8 +54,7 @@ void PrintItemTicket(struct ItemTicket *pItemTicket)
 		pItemTicket = pItemTicket->next;
 	}
 	// Si ya no hay más elementos en la lista
-	if (pItemTicket == NULL)
-	{
+	if (pItemTicket == NULL){
 		printf("\n------------------------------------------------\n");
 		printf("\t\t\t\tTOTAL: $ %.2f", total);
 		printf("\n------------------------------------------------\n");
@@ -132,8 +62,7 @@ void PrintItemTicket(struct ItemTicket *pItemTicket)
 	printf("\n");
 }
 
-void PrintTicket(struct Ticket *pTicket)
-{
+void PrintTicket(struct Ticket *pTicket){
 	int column_width_product = 40;
 	int column_width_subtotal = 10;
 
@@ -168,10 +97,8 @@ void PrintTicket(struct Ticket *pTicket)
 	printf("### %s ###", pConfigTicket->messageGB);
 }
 
-void PrintTicketTreePre(struct Ticket *CopyTicketTree)
-{
-	if (CopyTicketTree != NULL)
-	{
+void PrintTicketTreePre(struct Ticket *CopyTicketTree){
+	if (CopyTicketTree != NULL){
 		// Imprimir Ticket
 		PrintTicket(CopyTicketTree);
 
@@ -184,22 +111,19 @@ void PrintTicketTreePre(struct Ticket *CopyTicketTree)
 // TREE AVL
 
 // Funcion para calcular la altura
-int height(struct Ticket *N)
-{
-	if (N == NULL)
-		return 0;
+int height(struct Ticket *N){
+	if (N == NULL) return 0;
+
 	return N->height;
 }
 
 // Funcion para hallar el maximo entre dos enteros
-int max(int a, int b)
-{
+int max(int a, int b){
 	return (a > b) ? a : b;
 }
 
 /* Funcion que crea un nuevo Ticket. */
-struct Ticket *newTicket()
-{
+struct Ticket *newTicket(){
 	struct Ticket *pNewTicket = (struct Ticket *)malloc(sizeof(struct Ticket));
 	int cant_prod_min;
 	int seguir = 1;
@@ -214,9 +138,8 @@ struct Ticket *newTicket()
 	strcpy(pNewTicket->date, getDate());
 	strcpy(pNewTicket->time, getTime());
 
-	// Items del ticket
-	while (seguir)
-	{
+	// Productos del ticket
+	while (seguir){
 		seguir = InsertItemTicket();
 		if (seguir)
 			cant_prod_min++;
@@ -237,8 +160,7 @@ struct Ticket *newTicket()
 }
 
 // Funcion para rotar a la derecha el subarbol y
-struct Ticket *rightRotate(struct Ticket *y)
-{
+struct Ticket *rightRotate(struct Ticket *y){
 	struct Ticket *x = y->left;
 	struct Ticket *T2 = x->right;
 	// Se realiza la rotacion
@@ -252,8 +174,7 @@ struct Ticket *rightRotate(struct Ticket *y)
 }
 
 // Funcion para rotar a la izquierda el sub�rbol x
-struct Ticket *leftRotate(struct Ticket *x)
-{
+struct Ticket *leftRotate(struct Ticket *x){
 	struct Ticket *y = x->right;
 	struct Ticket *T2 = y->left;
 	// Se realiza rotacion
@@ -267,29 +188,22 @@ struct Ticket *leftRotate(struct Ticket *x)
 }
 
 // Calcular el FB del Ticket
-int getBalance(struct Ticket *N)
-{
+int getBalance(struct Ticket *N){
 	if (N == NULL)
 		return 0;
 	return height(N->left) - height(N->right);
 }
 
-struct Ticket *insert(struct Ticket *Ticket)
-{
+struct Ticket *insert(struct Ticket *Ticket){
 	/* 1. Se realiza la rotacion normal*/
 	if (Ticket == NULL)
 		return newTicket();
 
-	if (id_tickets < Ticket->id)
-	{
+	if (id_tickets < Ticket->id){
 		Ticket->left = insert(Ticket->left);
-	}
-	else if (id_tickets > Ticket->id)
-	{
+	} else if (id_tickets > Ticket->id){
 		Ticket->right = insert(Ticket->right);
-	}
-	else
-	{
+	} else{
 		// no hay claves iguales
 		return Ticket;
 	}
@@ -308,14 +222,12 @@ struct Ticket *insert(struct Ticket *Ticket)
 	if (balance < -1 && id_tickets > Ticket->right->id)
 		return leftRotate(Ticket);
 	// Left Right Caso
-	if (balance > 1 && id_tickets > Ticket->left->id)
-	{
+	if (balance > 1 && id_tickets > Ticket->left->id){
 		Ticket->left = leftRotate(Ticket->left);
 		return rightRotate(Ticket);
 	}
 	// Right Left Caso
-	if (balance < -1 && id_tickets < Ticket->right->id)
-	{
+	if (balance < -1 && id_tickets < Ticket->right->id){
 		Ticket->right = rightRotate(Ticket->right);
 		return leftRotate(Ticket);
 	}
@@ -324,8 +236,7 @@ struct Ticket *insert(struct Ticket *Ticket)
 }
 
 /* Dado un arbol ABB no vacio, devuelve el Ticket con el valor de clave minimo encontrado */
-struct Ticket *minValueTicket(struct Ticket *Ticket)
-{
+struct Ticket *minValueTicket(struct Ticket *Ticket){
 	struct Ticket *current = Ticket;
 	/* bucle hacia abajo para encontrar la rama mas izquierda*/
 	while (current->left != NULL)
@@ -334,8 +245,7 @@ struct Ticket *minValueTicket(struct Ticket *Ticket)
 }
 
 // Funcion recursiva para eliminar el Ticket.
-struct Ticket *deleteTicket(struct Ticket *root, int id)
-{
+struct Ticket *deleteTicket(struct Ticket *root, int id){
 	// paso 1: realizer el borrado normal
 	if (root == NULL)
 		return root;
@@ -343,22 +253,16 @@ struct Ticket *deleteTicket(struct Ticket *root, int id)
 		root->left = deleteTicket(root->left, id);
 	else if (id > root->id)
 		root->right = deleteTicket(root->right, id);
-	else
-	{
-		if ((root->left == NULL) || (root->right == NULL))
-		{
+	else{
+		if ((root->left == NULL) || (root->right == NULL)){
 			struct Ticket *temp = root->left ? root->left : root->right;
-			if (temp == NULL)
-			{
+			if (temp == NULL){
 				temp = root;
 				root = NULL;
-			}
-			else
+			} else
 				*root = *temp; // Copia el contenido
 			free(temp);
-		}
-		else
-		{
+		} else{
 			// obtener el Ticket mas peque�o derecho
 			struct Ticket *temp = minValueTicket(root->right);
 			// copia los datos en este Ticket
@@ -372,7 +276,7 @@ struct Ticket *deleteTicket(struct Ticket *root, int id)
 		return root;
 	// Paso 2. actualizar altura
 	root->height = 1 + max(height(root->left),
-						   height(root->right));
+		height(root->right));
 	// Paso 3: obtener FB
 	int balance = getBalance(root);
 	// Si esta desbalanceado, ver los 4 casos
@@ -380,8 +284,7 @@ struct Ticket *deleteTicket(struct Ticket *root, int id)
 	if (balance > 1 && getBalance(root->left) >= 0)
 		return rightRotate(root);
 	// Left Right Caso
-	if (balance > 1 && getBalance(root->left) < 0)
-	{
+	if (balance > 1 && getBalance(root->left) < 0){
 		root->left = leftRotate(root->left);
 		return rightRotate(root);
 	}
@@ -389,8 +292,7 @@ struct Ticket *deleteTicket(struct Ticket *root, int id)
 	if (balance < -1 && getBalance(root->right) <= 0)
 		return leftRotate(root);
 	// Right Left Caso
-	if (balance < -1 && getBalance(root->right) > 0)
-	{
+	if (balance < -1 && getBalance(root->right) > 0){
 		root->right = rightRotate(root->right);
 		return leftRotate(root);
 	}
@@ -398,10 +300,8 @@ struct Ticket *deleteTicket(struct Ticket *root, int id)
 }
 
 // Funcion para imprimir el arbol en preorden
-void preOrder(struct Ticket *root)
-{
-	if (root != NULL)
-	{
+void preOrder(struct Ticket *root){
+	if (root != NULL){
 		printf("%d ", root->id);
 		preOrder(root->left);
 		preOrder(root->right);

@@ -115,7 +115,7 @@ void menuRegistrarUsuario()
             else
             {
                 printf("\n\tOcurrio un error al registrar el usuario\n");
-                printf("\nInténtelo mas tarde\n");
+                printf("\nIntentelo mas tarde\n");
             }
         }
         else
@@ -217,8 +217,8 @@ void menuSistema()
     system("cls");
     printf("\n     ======================================================================\n");
     printf("\t\t\t     BIENVENIDO AL SISTEMA\n");
-    printf("\t\t      Sistema de emision de tickets\n");
-    printf("\t\t      Ayala - Rolheiser - Uffelmann\n");
+    printf("\t\t         Sistema de emision de tickets\n");
+    printf("\t\t         Ayala - Rolheiser - Uffelmann\n");
     printf("     ======================================================================\n");
 
     InitialConfigTicket();

@@ -3,9 +3,10 @@
 #include <string.h>
 // Funciones para manipular los productos
 
-void PrintListProducts(){
+void PrintListProducts()
+{
   // printf("Selecciona un producto: \n\n");
-  printf("SELECCIONA UN PRODUCTO \n\n");
+  printf("\tSELECCIONA UN PRODUCTO \n\n");
   struct ListProducts *product = pListProducts;
   int column_width_id = 8;
   int column_width_name = 21;
@@ -23,7 +24,8 @@ void PrintListProducts(){
   PrintItemTable("---------", column_width_price);
   printf("\n");
 
-  while (product != NULL){
+  while (product != NULL)
+  {
     PrintItemTable(IntToString(product->itemInfo.idItem), column_width_id);
     PrintItemTable(product->itemInfo.name, column_width_name);
     // PrintItemTable(FloatToString(product->itemInfo.price), column_width_price);
@@ -36,7 +38,8 @@ void PrintListProducts(){
 }
 
 // infoProduct es cada linea del archivo de productos y con strtok se separa por comas y se guarda en un string
-void AddProduct(char *infoProduct){
+void AddProduct(char *infoProduct)
+{
   struct ListProducts *newProduct;
   newProduct = malloc(sizeof(struct ListProducts));
 
@@ -53,16 +56,20 @@ void AddProduct(char *infoProduct){
   // printf("price: %.2lf\n", newProduct->itemInfo.price);
 
   // Agregar a la lista de productos
-  if (pListProducts == NULL){
+  if (pListProducts == NULL)
+  {
     pListProducts = newProduct;
     newProduct->next = NULL;
-  } else{
+  }
+  else
+  {
     newProduct->next = pListProducts;
     pListProducts = newProduct;
   }
 }
 
-void SetListProducts(){
+void SetListProducts()
+{
   FILE *fp;
   char *line = NULL;
   size_t len = 0;
@@ -74,7 +81,8 @@ void SetListProducts(){
   if (fp == NULL)
     exit(EXIT_FAILURE);
 
-  while ((read = getline(&line, &len, fp)) != -1){
+  while ((read = getline(&line, &len, fp)) != -1)
+  {
     // printf("%s", line);
     AddProduct(line);
   }

@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void PrintItemTicket(struct ItemTicket *pItemTicket){
+void PrintItemTicket(struct ItemTicket *pItemTicket)
+{
   int column_width_product = 40;
   int column_width_subtotal = 10;
   char text[15];
   char price[15];
   double total = 0;
-  while (pItemTicket != NULL){
+  while (pItemTicket != NULL)
+  {
     PrintItemTable(pItemTicket->itemInfo->name, column_width_product);
     PrintItemTable("", column_width_subtotal);
     printf("\n");
@@ -23,7 +25,8 @@ void PrintItemTicket(struct ItemTicket *pItemTicket){
     pItemTicket = pItemTicket->next;
   }
   // Si ya no hay más elementos en la lista
-  if (pItemTicket == NULL){
+  if (pItemTicket == NULL)
+  {
     printf("\n------------------------------------------------\n");
     printf("\t\t\t\tTOTAL: $ %.2f", total);
     printf("\n------------------------------------------------\n");
@@ -31,7 +34,8 @@ void PrintItemTicket(struct ItemTicket *pItemTicket){
   printf("\n");
 }
 
-void PrintTicket(struct Ticket *pTicket){
+void PrintTicket(struct Ticket *pTicket)
+{
   int column_width_product = 40;
   int column_width_subtotal = 10;
 
@@ -71,8 +75,10 @@ void PrintTicket(struct Ticket *pTicket){
   free(pConfigTicket);
 }
 
-void PrintTicketTreePre(struct Ticket *CopyTicketTree){
-  if (CopyTicketTree != NULL){
+void PrintTicketTreePre(struct Ticket *CopyTicketTree)
+{
+  if (CopyTicketTree != NULL)
+  {
     // Imprimir Ticket
     PrintTicket(CopyTicketTree);
 
@@ -82,34 +88,41 @@ void PrintTicketTreePre(struct Ticket *CopyTicketTree){
   }
 }
 
-void ViewAllTickets(){
+void ViewAllTickets()
+{
   // Si no hay tickets, no se muestra nada
-  if (pTicketTree == NULL){
+  if (pTicketTree == NULL)
+  {
     PrintMessage("No hay tickets aun", "Info");
     return;
   }
 
-  printf("MOSTRANDO TODOS LOS TICKETS:\n");
+  printf("MOSTRANDO TODOS LOS TICKETS:\n\n");
   PrintTicketTreePre(pTicketTree);
   printf("\nFIN.\n");
 }
 
 // La funcion SearchTicketTree busca un ticket en el arbol de tickets
-struct Ticket *SearchTicketTree(struct Ticket *pTicketAux, int id){
+struct Ticket *SearchTicketTree(struct Ticket *pTicketAux, int id)
+{
   // Si el arbol esta vacio, no hay ningun ticket
-  if (pTicketAux == NULL){
+  if (pTicketAux == NULL)
+  {
     return NULL;
   }
   // Si el id del ticket es igual al id del ticket que se busca, se retorna el ticket
-  if (pTicketAux->id == id){
+  if (pTicketAux->id == id)
+  {
     return pTicketAux;
   }
   // Si el id del ticket es menor al id del ticket que se busca, se busca en el subarbol izquierdo
-  if (pTicketAux->id > id){
+  if (pTicketAux->id > id)
+  {
     return SearchTicketTree(pTicketAux->left, id);
   }
   // Si el id del ticket es mayor al id del ticket que se busca, se busca en el subarbol derecho
-  if (pTicketAux->id < id){
+  if (pTicketAux->id < id)
+  {
     return SearchTicketTree(pTicketAux->right, id);
   }
   // Si no se encuentra el ticket, se retorna NULL
@@ -118,7 +131,8 @@ struct Ticket *SearchTicketTree(struct Ticket *pTicketAux, int id){
 
 // La funcion SearchTicket busca un ticket en la lista de tickets
 // y lo retorna.
-struct Ticket *SearchTicket(int id){
+struct Ticket *SearchTicket(int id)
+{
   struct Ticket *pTicket = NULL;
   struct Ticket *pTicketAux = pTicketTree;
   pTicket = SearchTicketTree(pTicketAux, id);
@@ -126,7 +140,8 @@ struct Ticket *SearchTicket(int id){
 }
 
 // Muestra la configuracion del ticket y datos de un ticket de ejemplo
-void PreviewTicket(){
+void PreviewTicket()
+{
   // char *mode = "r";
   // // Ticket data
   // struct ConfigTicket *configT = GetConfigTicket(mode);

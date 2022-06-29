@@ -39,7 +39,7 @@ void SetConfigTicket()
   FILE *fptr;
   fptr = fopen(filename, mode);
 
-  printf("\n\nESTABLECIENDO LA CONFIGURACION DEL TICKET\n\n");
+  printf("\n\n\t\tESTABLECIENDO LA CONFIGURACION DEL TICKET\n\n");
 
   printf("\tIngrese la razon social: ");
   fflush(stdin);
@@ -75,7 +75,7 @@ void SetConfigTicket()
   fprintf(fptr, "%s,", configT.resIVA);
   fprintf(fptr, "%s", configT.messageGB);
 
-  printf("\nTICKET CONFIGURADO CORRECTAMENTE\n\n");
+  printf("\n\t\tTICKET CONFIGURADO CORRECTAMENTE\n\n");
 
   fclose(fptr);
 }
@@ -116,6 +116,9 @@ void PrintConfigTicket()
   printf("\t- CUIT: %s\n", configT->cuit);
   printf("\t- Responsabilidad IVA: %s\n", configT->resIVA);
   printf("\t- Mensaje de Gracias: %s\n", configT->messageGB);
-
+  printf("\n\n");
   free(configT);
+
+  system("pause");
+  system("cls");
 }

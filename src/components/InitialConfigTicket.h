@@ -9,7 +9,7 @@ void InitialConfigTicket()
   SetConfigTicket();
   PrintConfigTicket();
 
-  printf("\tMas adelante, podra volver a ver o configurar el ticket.\n");
+  // printf("\tMas adelante, podra volver a ver o configurar el ticket.\n");
 
   // Bandera para saber que ya se configuro el ticket
   setTicket = 1;

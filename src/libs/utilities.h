@@ -7,9 +7,9 @@
 
 void PrintMessage(char *message, char *type)
 {
-  printf("\n------------------------\n");
-  printf("%s: %s\n", type, message);
-  printf("------------------------\n\n");
+  printf("\n\t------------------------\n");
+  printf("\t%s: %s\n", type, message);
+  printf("\t------------------------\n\n");
 }
 
 void MenuTitle(char *title)

@@ -9,21 +9,21 @@ void MenuSystem()
   {
     printf("\n\n");
     MenuTitle("MENU PRINCIPAL");
-    printf("1) Generar un Ticket\n");
-    printf("2) Ver un Ticket\n");
-    printf("3) Ver todos los Tickets\n");
+    printf("\t1) Generar un Ticket\n");
+    printf("\t2) Ver un Ticket\n");
+    printf("\t3) Ver todos los Tickets\n");
 
     printf("\n");
 
     MenuTitle("MENU SYSTEM");
     // printf("4) Configuracion de cuenta (?)\n");
-    printf("4) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
+    printf("\t4) Configuracion del ticket \n"); // Mostrar como se ve el ticket y preguntar que quiere cambiar
     // printf("6) Cerrar sesion\n");
-    printf("5) Salir\n");
+    printf("\t5) Salir\n");
 
     printf("\n");
 
-    printf("Ingrese una opcion: ");
+    printf("\tIngrese una opcion: ");
     scanf("%d", &option);
 
     switch (option)
@@ -31,7 +31,7 @@ void MenuSystem()
     case 1:
       printf("\n");
       pTicketTree = insert(pTicketTree);
-      printf("TICKET GENERADO CORRECTAMENTE\n\n");
+      printf("\tTICKET GENERADO CORRECTAMENTE\n\n");
       break;
     case 2:
       printf("\n\n");
@@ -64,7 +64,7 @@ void MenuSystem()
       printf("\n\n");
       break;
     default:
-      PrintMessage("Opcion invalida", "Error");
+      PrintMessage("\tOpcion invalida", "Error");
     }
   } while (option != 8);
 }

@@ -217,8 +217,8 @@ void menuSistema()
     system("cls");
     printf("\n     ======================================================================\n");
     printf("\t\t\t     BIENVENIDO AL SISTEMA\n");
-    printf("\t\t    Sistema de emision de tickets\n");
-    printf("\t\t    Ayala - Rolheiser - Uffelmann\n");
+    printf("\t\t      Sistema de emision de tickets\n");
+    printf("\t\t      Ayala - Rolheiser - Uffelmann\n");
     printf("     ======================================================================\n");
 
     InitialConfigTicket();

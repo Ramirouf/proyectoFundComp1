@@ -2,24 +2,26 @@
 #include <stdlib.h>
 
 // Definir responsabilidad ante el IVA del emisor del ticket
-char *IVAResponsability(){
+char *IVAResponsability()
+{
   int option;
   char *responsability[] = {
-    "IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo", "Monotributista Social"
-  };
+      "IVA Responsable Inscripto", "IVA no Responsable", "IVA exento", "Responsable Monotributo", "Monotributista Social"};
 
-  do{
-    printf("Responsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
-    printf("1. IVA Responsable Inscripto\n");
-    printf("2. IVA no Responsable\n");
-    printf("3. IVA exento\n");
-    printf("4. Responsable Monotributo\n");
-    printf("5. Monotributista Social\n");
+  do
+  {
+    printf("\tResponsabilidad frente al impuesto al valor agregado del emisor segun corresponda:\n");
+    printf("\t1. IVA Responsable Inscripto\n");
+    printf("\t2. IVA no Responsable\n");
+    printf("\t3. IVA exento\n");
+    printf("\t4. Responsable Monotributo\n");
+    printf("\t5. Monotributista Social\n");
 
-    printf("Ingrese una opcion: ");
+    printf("\tIngrese una opcion: ");
     scanf("%d", &option);
 
-    if (option < 1 || option > 5){
+    if (option < 1 || option > 5)
+    {
       PrintMessage("Opcion invalida", "Error");
     }
   } while (option < 1 || option > 5);
@@ -27,7 +29,8 @@ char *IVAResponsability(){
   return responsability[option - 1];
 }
 
-void SetConfigTicket(){
+void SetConfigTicket()
+{
   char *filename = "./public/ticket_config.txt";
   char *mode = "w";
 
@@ -38,29 +41,29 @@ void SetConfigTicket(){
 
   printf("\n\nESTABLECIENDO LA CONFIGURACION DEL TICKET\n\n");
 
-  printf("Ingrese la razon social: ");
+  printf("\tIngrese la razon social: ");
   fflush(stdin);
   gets(configT.businessName);
 
-  printf("Ingrese la direccion: ");
+  printf("\tIngrese la direccion: ");
   fflush(stdin);
   gets(configT.address);
 
-  printf("Ingrese el telefono: ");
+  printf("\tIngrese el telefono: ");
   fflush(stdin);
   gets(configT.phone);
 
-  printf("Ingrese el codigo postal: ");
+  printf("\tIngrese el codigo postal: ");
   fflush(stdin);
   gets(configT.postalCode);
 
-  printf("Ingrese el CUIT: ");
+  printf("\tIngrese el CUIT: ");
   fflush(stdin);
   gets(configT.cuit);
 
   sprintf(configT.resIVA, "%s", IVAResponsability());
 
-  printf("Ingrese el mensaje de Leyenda(mensaje al final del Ticket): ");
+  printf("\tIngrese el mensaje de Leyenda(mensaje al final del Ticket): ");
   fflush(stdin);
   gets(configT.messageGB);
 
@@ -77,7 +80,8 @@ void SetConfigTicket(){
   fclose(fptr);
 }
 
-struct ConfigTicket *GetConfigTicket(){
+struct ConfigTicket *GetConfigTicket()
+{
   struct ConfigTicket *config = malloc(sizeof(struct ConfigTicket));
   FILE *fptr;
   char *filename = "./public/ticket_config.txt";
@@ -86,7 +90,8 @@ struct ConfigTicket *GetConfigTicket(){
   size_t len = 0;
 
   fptr = fopen(filename, mode);
-  if (fptr == NULL)	exit(EXIT_FAILURE);
+  if (fptr == NULL)
+    exit(EXIT_FAILURE);
 
   getline(&line, &len, fptr);
   // %[^,] -> Lee hasta que encuentre una coma
@@ -98,18 +103,19 @@ struct ConfigTicket *GetConfigTicket(){
   return config;
 }
 
-void PrintConfigTicket(){
+void PrintConfigTicket()
+{
   struct ConfigTicket *configT = GetConfigTicket();
 
   // Print the text from the file.
-  printf("CONFIGURACION DEL TICKET\n\n");
-  printf("- Nombre de la empresa: %s\n", configT->businessName);
-  printf("- Direccion: %s\n", configT->address);
-  printf("- Telefono: %s\n", configT->phone);
-  printf("- Codigo Postal: %s\n", configT->postalCode);
-  printf("- CUIT: %s\n", configT->cuit);
-  printf("- Responsabilidad IVA: %s\n", configT->resIVA);
-  printf("- Mensaje de Gracias: %s\n", configT->messageGB);
+  printf("\tCONFIGURACION DEL TICKET\n\n");
+  printf("\t- Nombre de la empresa: %s\n", configT->businessName);
+  printf("\t- Direccion: %s\n", configT->address);
+  printf("\t- Telefono: %s\n", configT->phone);
+  printf("\t- Codigo Postal: %s\n", configT->postalCode);
+  printf("\t- CUIT: %s\n", configT->cuit);
+  printf("\t- Responsabilidad IVA: %s\n", configT->resIVA);
+  printf("\t- Mensaje de Gracias: %s\n", configT->messageGB);
 
   free(configT);
 }
